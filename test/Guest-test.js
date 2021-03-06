@@ -18,6 +18,25 @@ describe('Guest', () => {
   const guestOne = new Guest(userData.customers[0]);
   const guestTwo = new Guest(userData.customers[1])
 
+  const bookingData = {
+    "bookings": [
+      {
+        "id": "5fwrgu4i7k55hl6sz",
+        "userID": 1,
+        "date": "2020/04/22",
+        "roomNumber": 15,
+        "roomServiceCharges": []
+      },
+      {
+        "id": "5fwrgu4i7k55hl6t5",
+        "userID": 1,
+        "date": "2020/01/24",
+        "roomNumber": 24,
+        "roomServiceCharges": []
+      },
+    ]
+  }
+
   describe('Properties', () => {
     it('should be a function', () => {
       expect(Guest).to.be.a('function');

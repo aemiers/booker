@@ -2,40 +2,36 @@ import { expect } from 'chai';
 import Customer from '../src/Customer';
 
 describe('Customer', () => {
-  const customerData = {
-    "customers": [
-      {
-        "id": 1,
-        "name": "Leatha Ullrich"
-      },
-      {
-        "id": 2,
-        "name": "Rocio Schuster"
-      },
-    ]
-  }
+  const customerData = [
+    {
+      "id": 1,
+      "name": "Leatha Ullrich"
+    },
+    {
+      "id": 2,
+      "name": "Rocio Schuster"
+    },
+  ]
 
-  const bookingsData = {
-    "bookings": [
-      {
-        "id": "5fwrgu4i7k55hl6sz",
-        "userID": 1,
-        "date": "2020/04/22",
-        "roomNumber": 15,
-        "roomServiceCharges": []
-      },
-      {
-        "id": "5fwrgu4i7k55hl6t5",
-        "userID": 1,
-        "date": "2020/01/24",
-        "roomNumber": 24,
-        "roomServiceCharges": []
-      },
-    ]
-  }
+  const bookingsData = [
+    {
+      "id": "5fwrgu4i7k55hl6sz",
+      "userID": 1,
+      "date": "2020/04/22",
+      "roomNumber": 15,
+      "roomServiceCharges": []
+    },
+    {
+      "id": "5fwrgu4i7k55hl6t5",
+      "userID": 1,
+      "date": "2020/01/24",
+      "roomNumber": 24,
+      "roomServiceCharges": []
+    },
+  ]
 
-  const customerOne = new Customer(customerData.customers[0]);
-  const customerTwo = new Customer(customerData.customers[1]);
+  const customerOne = new Customer(customerData[0]);
+  const customerTwo = new Customer(customerData[1]);
 
   describe('Properties', () => {
     it('should be a function', () => {

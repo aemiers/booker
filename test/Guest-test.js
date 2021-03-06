@@ -1,9 +1,8 @@
 import { expect } from 'chai';
-import Guest from '../src/Guest';
+import Customer from '../src/Customer';
 
-describe('Guest', () => {
-
-  const userData = {
+describe('Customer', () => {
+  const customerData = {
     "customers": [
       {
         "id": 1,
@@ -15,10 +14,8 @@ describe('Guest', () => {
       },
     ]
   }
-  const guestOne = new Guest(userData.customers[0]);
-  const guestTwo = new Guest(userData.customers[1])
 
-  const bookingData = {
+  const bookingsData = {
     "bookings": [
       {
         "id": "5fwrgu4i7k55hl6sz",
@@ -37,34 +34,59 @@ describe('Guest', () => {
     ]
   }
 
+  const customerOne = new Customer(customerData.customers[0]);
+  const customerTwo = new Customer(customerData.customers[1]);
+
   describe('Properties', () => {
     it('should be a function', () => {
-      expect(Guest).to.be.a('function');
+      expect(Customer).to.be.a('function');
     });
 
-    it('should be an instance of Guest', () => {
-      expect(guestOne).to.be.an.instanceof(Guest);
+    it('should be an instance of Customer', () => {
+      expect(customerOne).to.be.an.instanceof(Customer);
     });
 
     it('should have an id and a name', () => {
-      expect(guestOne.id).to.equal(1);
-      expect(guestOne.name).to.equal("Leatha Ullrich");
-      expect(guestTwo.id).to.equal(2);
-      expect(guestTwo.name).to.equal("Rocio Schuster");
+      expect(customerOne.id).to.equal(1);
+      expect(customerOne.name).to.equal("Leatha Ullrich");
+      expect(customerTwo.id).to.equal(2);
+      expect(customerTwo.name).to.equal("Rocio Schuster");
 
     });
 
     it('should start off with no bookings or future bookings', () => {
-      expect(guestOne.previousBookings.length).to.equal(0);
-      expect(guestOne.futureBookings.length).to.equal(0);
+      expect(customerOne.previousBookings.length).to.equal(0);
+      expect(customerOne.futureBookings.length).to.equal(0);
     })
 
   });
 
   describe('Methods', () => {
-    it('should return a guests first name', () => {
-      expect(guestOne.getFirstName()).to.equal("Leatha");
-      expect(guestTwo.getFirstName()).to.equal("Rocio");
+    it('should return a customers first name', () => {
+      expect(customerOne.getCustomerFirstName()).to.equal("Leatha");
+      expect(customerTwo.getCustomerFirstName()).to.equal("Rocio");
     });
+
+    // it('should be able to view previous bookings', () => {
+
+    // });
+
+    // it('should return a message if the customer has had no previous bookings', () => {
+
+
+    // });
+
+    // it('should be able to view future bookings', () => {
+
+    // });
+
+    // it('should return a message if the customer has had no future bookings', () => {
+
+    // });
+
+    // it('should be able to calculate the total spent on future and past bookings', () => {
+
+    // });
+
   });
 });

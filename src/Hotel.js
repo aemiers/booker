@@ -6,15 +6,21 @@ class Hotel {
   }
 
   findCustomerById(searchNumber) {
-    console.log(this.customers)
-
-    this.customers.filter(customers => {
-      console.log(customer)
-      customer.id === searchNumber
-    })
+    return this.customers.filter(customer => customer.id === searchNumber)
   }
 
+  findRoomByRoomType(searchWord) {
+    const foundRooms = this.rooms.filter(room => room.roomType === searchWord);
+    return foundRooms;
+  }
+
+  findAvailableRoomsOnDate(searchDate) {
+    const bookedRoomNumbers = this.bookings.filter(bookings => bookings.date === searchDate).map(bookings => bookings.roomNumber);
+    const availableRooms = this.rooms.filter(room => !bookedRoomNumbers.includes(room.number));
+    return availableRooms;
+  }
 
 }
+
 
 export default Hotel;

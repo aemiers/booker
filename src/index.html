@@ -1,13 +1,123 @@
 <!DOCTYPE html>
-<html lang="en-US">
-  <head>
-    <title>Webpack Starter Kit</title>
-  </head>
-  <body>
-    <h1>Webpack Starter Kit</h1>
+<html lang="en-US" dir="ltr">
 
-    <img src="./images/turing-logo.png" alt="turing logo" height="100px" width="100px">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Overlook Hotel Booker">
+  <meta name="keywords" content="Hotel, Travel, Booking">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Overlook Booker</title>
+  <link rel="preconnect" type="text/css" href="https://fonts.gstatic.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500&display=swap"
+    rel="stylesheet">
 
-    <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
-  </body>
+  <!-- <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,800&display=swap"
+    rel="stylesheet" /> -->
+</head>
+
+<body class="body">
+
+  <header class="header">
+    <img alt="booker logo" src="./images/logo.png" class="logo">
+    <p class="welcome">Welcome back, Name!</p>
+  </header>
+
+  <section class="main-image-section">
+
+    <div class="main-image-container">
+      <img alt="overlook hotel image" src="./images/neuschwanstein.jpg" class="main-image">
+    </div>
+
+    <div class="date-entry-section">
+      <label for="date">Search Date:
+        <input type="date" id="searchDate" name="date" required pattern="\d{4}/\d{2}/\d{2}"
+          aria-label="booking search date" required></label>
+
+      <button id="submit" class="submit-button" type="submit">
+        <img alt="search glass" src="./images/search.svg" class="search-glass"></button>
+    </div>
+  </section>
+
+  <nav class="navigation" id="navigation">
+    <!-- <button class="navigation__drop-down drop-down" id="dropDown" aria-label="Open drop down menu"></button> -->
+    <section id="navButtonContainer" class="nav-button-container">
+      <a id="searchResults" class="nav-btn">Search Results</a>
+      <a id="upcomingBookings" class="nav-btn">Upcoming Bookings</a>
+      <a id="pastBookings" class="nav-btn">Past Bookings</a>
+      <a id="myAccount" class="nav-btn">My Account</a>
+    </section>
+  </nav>
+
+  <main>
+
+    <section class="room-card hidden">
+      <img alt="room picture" src="./images/bedroom1.jpg" class="room-image">
+      <section class="middle-column-container">
+        <h2 class="room-type-card-header">Room Type Here</h2>
+        <div class="room-specs">
+          <img alt="bed icon" src="./images/bed.svg" class="small-icon">
+          <p>Number of Bed Size Beds</p>
+        </div>
+        <div class="room-specs">
+          <img alt="people icon" src="./images/users.svg" class="small-icon">
+          <p>Sleeps 2</p>
+        </div>
+        <div class="room-specs">
+          <img alt="shower icon" src="./images/shower.svg" class="small-icon">
+          <p>1 Bathroom</p>
+        </div>
+        <div class="room-specs">
+          <img alt="toilet icon" src="./images/toilet.svg" class="small-icon">
+          <p>Has Bidet</p>
+        </div>
+      </section>
+      <section class="end-column-container ">
+        <div class="reserve-options ">
+          <button id="reserveBtn" class="reserve-btn ">Reserve Room</button>
+          <h1 class="room-cost">$345.23<span class="span-per-night"> /night</span></h1>
+        </div>
+        <div class="expense-details hidden">
+          <h2 class="expense">Expense Details:</h2>
+          <p class="expense">$345.23/night</p>
+          <h2 class="expense">$650.32<span class="span-per-night"> total</span></h2>
+        </div>
+      </section>
+    </section>
+    <section class="room-total">
+      <h2>Account Summary</h2>
+      <p>You have spent $5983.94 on rooms</p>
+    </section>
+
+  </main>
+
+
+
+
+
+
+
+
+
+
+  <!-- <section id="searchResultsContainer" class="">
+    <div class="filter-button-container">
+      <button id="" class="filter">Room Type</button>
+    </div>
+
+  </section>
+  <section id="upcomingBookingsContainer" class="">
+
+  </section>
+
+  <section id="pastBookingsContainer" class="">
+
+  </section>
+
+  <section id="myAccountContainer" class="">
+
+  </section> -->
+
+</body>
+
 </html>

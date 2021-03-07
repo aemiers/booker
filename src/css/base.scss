@@ -1,7 +1,192 @@
-/* This is an example of using Sass, otherwise plain CSS works too*/
-$primary-background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
-;
 
-body {
-  background: $primary-background;
+.header {
+  @include margin;
+  height: 5.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .logo {
+    width: 11rem;
+  }
 }
+
+.main-image-section{
+  position: relative;
+
+  .main-image-container {
+    height: 31rem;
+    overflow: hidden;
+    margin: 0;
+    position: relative;
+    @include borders;
+
+    .main-image {
+      display: block;
+      width: 100%;
+      margin:-0.875% 0;
+    }
+  }
+
+  .date-entry-section {
+    display: flex;
+    align-items: flex-end;
+    position: absolute;
+    top: 15%;
+    left: 21%;
+  
+    label {
+      // position: absolute;
+      // top: 2rem;
+      // left: 5rem;
+    }
+
+    input {
+      @include simple-border;
+      width: 93%;
+      height: 3.5rem;
+      padding: 0 30px 0 30px;
+      border-top-left-radius: 30px;
+      border-bottom-left-radius: 30px;
+    }
+
+    .submit-button {
+      @include simple-border;
+      position: relative;
+      right: -4%;
+      background-color: $accent-orange;
+      height: 3.75rem;
+      width: 5rem;
+      border-top-right-radius: 30px;
+      border-bottom-right-radius: 30px;
+      @include transition;
+
+      .search-glass {
+        width: 2rem;
+      }
+
+      &:hover {
+        @include btnHover;
+      }
+    }
+  }
+}
+
+.nav-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 3px solid $black;
+
+  .nav-btn {
+    position: relative;
+    cursor: pointer;
+    margin: 30px 30px 30px 30px;
+    padding-bottom: 5px;
+
+  
+    &:after {
+      content: "";
+      @include transition;
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background-color: $accent-orange;
+      visibility: hidden;
+    }
+
+    &:hover:after {
+      visibility: visible;
+      width: 100%;
+    }
+  }
+}
+
+main {
+  @include margin;
+}
+
+.room-card {
+  margin-top: 30px;
+  padding-bottom: 30px;
+  border-bottom: 2px solid $black;
+  display: flex;
+  justify-content: space-around;
+
+  .room-type-card-header {
+    margin-bottom: 10px;
+  }
+
+  .room-image {
+    @include simple-border;
+    width: 33%;
+    border-radius: $border-radius;
+  }
+
+  .middle-column-container {
+    display: flex;
+    flex-direction: column;
+    padding-top: 35px;
+
+    .small-icon {
+      width: 20px;
+      margin-right: 10px;
+    }
+    
+    .room-specs {
+      display: flex;
+      margin-top: 15px;
+    }
+  }
+
+  .end-column-container {
+    padding-top: 65px;
+    display: flex;
+    justify-items: column;
+    // align-items: flex-end;
+
+    .reserve-btn {
+      background-color: $accent-orange;
+      border-radius: $border-radius;
+      height: 4rem;
+      margin-bottom: 20px;
+      padding: 0 25px 0 25px;
+      font-size: 20px;
+      border: 2px solid $black;
+      @include transition;
+
+
+      &:hover {
+        @include btnHover;
+      }
+    }
+
+    span {
+      font-size: 14px;
+    }
+
+    .expense {
+      padding-top: 15px;
+    }
+  }
+}
+
+.room-total {
+  @include margin;
+  padding: 50px 0 150px 0;
+}
+
+.hidden {
+  display: none !important;
+}
+
+
+
+
+
+
+
+
+

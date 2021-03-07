@@ -1,0 +1,28 @@
+@mixin margin {
+  margin-right: 50px;
+  margin-left: 50px;
+  // max-width: 1400px;
+}
+
+@mixin borders {
+  border-top: 10px solid $black;
+  border-bottom: 10px solid $black;
+  // border-left: 20px solid $black;
+  // border-right: 20px solid $black;
+}
+
+@mixin simple-border {
+  border-top: 2px solid $black;
+  border-bottom: 2px solid $black;
+  border-left: 2px solid $black;
+  border-right: 2px solid $black;
+}
+
+@mixin transition {
+  transition: all 0.3s ease-in-out;
+}
+
+@mixin btnHover {
+  cursor: pointer;
+  background-color: hsl(11, 88%, 54%);
+}

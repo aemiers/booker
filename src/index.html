@@ -17,12 +17,54 @@
 </head>
 
 <body class="body">
+
   <header class="header">
-    <img alt="booker logo" src="" class="logo">
+    <img alt="booker logo" src="./images/logo.png" class="logo">
     <p class="welcome">Welcome back, Name!</p>
   </header>
-  <section>
-    <img alt="overlook hotel image" src="./images/The Rock.jpg" class="main-image">
+
+  <section class="main-image-section">
+
+    <div class="main-image-container">
+      <img alt="overlook hotel image" src="./images/neuschwanstein.jpg" class="main-image">
+    </div>
+
+    <div class="date-entry-section">
+      <label for="date">Search Date<span class="span-required">* </span>:
+        <input type="date" id="searchDate" name="date" required pattern="\d{4}/\d{2}/\d{2}"
+          aria-label="booking search date" required></label>
+
+      <button id="submit" class="submit-button" type="submit">
+        <img alt="search glass" src="./images/search.svg" class="search-glass"></button>
+    </div>
+  </section>
+
+  <nav class="navigation" id="navigation">
+    <!-- <button class="navigation__drop-down drop-down" id="dropDown" aria-label="Open drop down menu"></button> -->
+    <section id="navButtonContainer" class="nav-button-container">
+      <button id="searchResults" class="nav-btn">Search Results</button>
+      <button id="upcomingBookings" class="nav-btn">Upcoming Bookings</button>
+      <button id="pastBookings" class="nav-btn">Past Bookings</button>
+      <button id="myAccount" class="nav-btn">My Account</button>
+
+    </section>
+  </nav>
+
+  <section id="searchResultsContainer" class="">
+    <div class="filter-button-container">
+      <button id="" class="filter">Room Type</button>
+    </div>
+
+  </section>
+  <section id="upcomingBookingsContainer" class="">
+
+  </section>
+
+  <section id="pastBookingsContainer" class="">
+
+  </section>
+
+  <section id="myAccountContainer" class="">
 
   </section>
 

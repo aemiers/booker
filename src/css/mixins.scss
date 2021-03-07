@@ -1,1 +1,20 @@
+@mixin margin {
+  margin-right: 50px;
+  margin-left: 50px;
+}
+
+@mixin borders {
+  border-top: 20px solid $black;
+  border-bottom: 20px solid $black;
+  border-left: 20px solid $black;
+  border-right: 20px solid $black;
+}
+
+@mixin simple-border {
+  border-top: 2px solid $black;
+  border-bottom: 2px solid $black;
+  border-left: 2px solid $black;
+  border-right: 2px solid $black;
+}
+
 

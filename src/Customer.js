@@ -28,10 +28,10 @@ class Customer {
     const foundRoomNumbers = this.getRoomNumbers(allBookings);
     roomsData.forEach(room => {
       if (foundRoomNumbers.includes(room.number)) {
-        roomCost += room.costPerNight
+        roomCost += room.costPerNight;
       }
     })
-    return roomCost
+    return roomCost;
   }
 }
 

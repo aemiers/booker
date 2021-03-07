@@ -89,7 +89,6 @@ describe('Customer', () => {
       expect(customerOne.previousBookings.length).to.equal(0);
       expect(customerOne.futureBookings.length).to.equal(0);
     })
-
   });
 
   describe('Methods', () => {
@@ -114,6 +113,5 @@ describe('Customer', () => {
       customerOne.getFutureBookings(bookingsData, "2020/04/22");
       expect(customerOne.calculateTotalSpent(roomsData)).to.equal(1326.92);
     });
-
   });
 });

@@ -1,6 +1,7 @@
 @mixin margin {
   margin-right: 50px;
   margin-left: 50px;
+  // max-width: 1400px;
 }
 
 @mixin borders {
@@ -17,4 +18,11 @@
   border-right: 2px solid $black;
 }
 
+@mixin transition {
+  transition: all 0.3s ease-in-out;
+}
 
+@mixin btnHover {
+  cursor: pointer;
+  background-color: hsl(11, 88%, 54%);
+}

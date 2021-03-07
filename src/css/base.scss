@@ -8,7 +8,6 @@
 
   .logo {
     width: 11rem;
-    // padding: 155px 0 155px 0
   }
 }
 
@@ -16,7 +15,6 @@
   position: relative;
 
   .main-image-container {
-    // width: 100%;
     height: 31rem;
     overflow: hidden;
     margin: 0;
@@ -61,9 +59,14 @@
       width: 5rem;
       border-top-right-radius: 30px;
       border-bottom-right-radius: 30px;
+      @include transition;
 
       .search-glass {
         width: 2rem;
+      }
+
+      &:hover {
+        @include btnHover;
       }
     }
   }
@@ -84,6 +87,7 @@
   
     &:after {
       content: "";
+      @include transition;
       position: absolute;
       width: 0;
       height: 2px;
@@ -91,7 +95,6 @@
       left: 0;
       background-color: $accent-orange;
       visibility: hidden;
-      transition: all 0.3s ease-in-out;
     }
 
     &:hover:after {
@@ -101,23 +104,83 @@
   }
 }
 
+main {
+  @include margin;
+}
 
-   
-   
-   
-    // @include simple-border;
-    // border-bottom: 0;
-    // border-radius: $border-radius;
-    // // border-top-left-radius: 30px;
-    // // border-top-right-radius: 30px;
-    // font-size: 1rem;
-    // font-weight: 500;
-    // width: 10rem;
-    // padding: 8px 0 8px 0;
-    // margin-right: 20px;
-    // height: 4rem;
-//   }
-// }
+.room-card {
+  margin-top: 30px;
+  padding-bottom: 30px;
+  border-bottom: 2px solid $black;
+  display: flex;
+  justify-content: space-around;
+
+  .room-type-card-header {
+    margin-bottom: 10px;
+  }
+
+  .room-image {
+    @include simple-border;
+    width: 33%;
+    border-radius: $border-radius;
+  }
+
+  .middle-column-container {
+    display: flex;
+    flex-direction: column;
+    padding-top: 35px;
+
+    .small-icon {
+      width: 20px;
+      margin-right: 10px;
+    }
+    
+    .room-specs {
+      display: flex;
+      margin-top: 15px;
+    }
+  }
+
+  .end-column-container {
+    padding-top: 65px;
+    display: flex;
+    justify-items: column;
+    // align-items: flex-end;
+
+    .reserve-btn {
+      background-color: $accent-orange;
+      border-radius: $border-radius;
+      height: 4rem;
+      margin-bottom: 20px;
+      padding: 0 25px 0 25px;
+      font-size: 20px;
+      border: 2px solid $black;
+      @include transition;
+
+
+      &:hover {
+        @include btnHover;
+      }
+    }
+
+    span {
+      font-size: 14px;
+    }
+
+    .expense {
+      padding-top: 15px;
+    }
+  }
+}
+
+.hidden {
+  display: none !important;
+}
+
+
+
+
+
 
 
 

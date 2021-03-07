@@ -14,6 +14,16 @@ import './images/search.svg';
 import './images/users.svg';
 import './images/shower.svg';
 // QUERY SELECTORS
+const welcomeSaying = document.querySelector('.welcome');
+const searchDateInput = document.querySelector('#searchDate');
+const searchSubmitBtn = document.querySelector('#searchSubmit');
+const searchResultsBtn = document.querySelector('#searchResults');
+const upcomingBookingsBtn = document.querySelector('#upcomingBookings');
+const pastBookingsBtn = document.querySelector('#pastBookings');
+const myAccountBtn = document.querySelector('#myAccount');
+const reserveRoomBtn = document.querySelector('#reserveBtn');
+
+
 
 // GLOBAL VARIABLES
 let hotel, customer;

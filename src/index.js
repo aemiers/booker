@@ -13,6 +13,8 @@ import './images/logo.png';
 import './images/neuschwanstein.jpg';
 import './images/toilet.svg';
 import './images/search.svg';
+import './images/users.svg';
+import './images/shower.svg';
 
 
 // console.log('This is the JavaScript entry file - your code begins here.');

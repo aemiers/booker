@@ -42,15 +42,60 @@
   <nav class="navigation" id="navigation">
     <!-- <button class="navigation__drop-down drop-down" id="dropDown" aria-label="Open drop down menu"></button> -->
     <section id="navButtonContainer" class="nav-button-container">
-      <button id="searchResults" class="nav-btn">Search Results</button>
-      <button id="upcomingBookings" class="nav-btn">Upcoming Bookings</button>
-      <button id="pastBookings" class="nav-btn">Past Bookings</button>
-      <button id="myAccount" class="nav-btn">My Account</button>
-
+      <a id="searchResults" class="nav-btn">Search Results</a>
+      <a id="upcomingBookings" class="nav-btn">Upcoming Bookings</a>
+      <a id="pastBookings" class="nav-btn">Past Bookings</a>
+      <a id="myAccount" class="nav-btn">My Account</a>
     </section>
   </nav>
+  <main>
 
-  <section id="searchResultsContainer" class="">
+    <section class="room-card">
+      <img alt="room image" src="./images/bedroom1.jpg" class="room-image">
+      <section class="middle-column-container">
+        <h2 class="room-type">Room Type Here</h2>
+        <div>
+          <img alt="bed icon" src="./images/bed.svg" class="small-icon">
+          <p>Number of Bed Size Beds</p>
+        </div>
+        <div>
+          <img alt="people icon" src="./images/users.svg" class="small-icon">
+          <p>Sleeps 2</p>
+        </div>
+        <div>
+          <img alt="shower icon" src="./images/shower.svg" class="small-icon">
+          <p>1 Bathroom</p>
+        </div>
+        <div>
+          <img alt="toilet icon" src="./images/toilet.svg" class="small-icon">
+          <p>Has Bidet</p>
+        </div>
+      </section>
+      <section class="end-column-container">
+        <button id="reserveBtn" class="reserve-btn">Reserve Room</button>
+        <h1 class="room-cost">$345.23<span class="span-per-night">/night</span></h1>
+      </section>
+    </section>
+
+
+
+
+
+
+
+  </main>
+
+
+
+
+
+
+
+
+
+
+
+  <!-- <section id="searchResultsContainer" class="">
     <div class="filter-button-container">
       <button id="" class="filter">Room Type</button>
     </div>
@@ -66,7 +111,7 @@
 
   <section id="myAccountContainer" class="">
 
-  </section>
+  </section> -->
 
 </body>
 

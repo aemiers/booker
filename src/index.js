@@ -18,25 +18,45 @@ import './images/shower.svg';
 // GLOBAL VARIABLES
 let hotel, customer;
 
+// FUNCTIONS
+const createHotel = (data) => {
+  hotel = new Hotel(data[0], data[1], data[2]);
+  console.log(data[2])
+  createCustomer(data)
+}
+
+const createCustomer = (data) => {
+  customer = new Customer(data[0][0])
+  customer.getPreviousBookings(data[2], "2020/02/19");
+  customer.getFutureBookings(data[2], "2020/02/19")
+}
+
+
+
+
 
 
 
 
 // STOP TRYING TO MAKE FETCH WORK
-const customerData = getData('customers', 'customers');
-const bookingsData = getData('bookings', 'bookings');
-const roomsData = getData('rooms', 'rooms');
 
-const getData (endOfURL, name) {
-  return fetch(`http://localhost:3001/api/v1/${endOfUrl}`)
+const displayErrorMessage = (error) => {
+  console.log(error)
+}
+
+const customerData = getData('/customers', 'customers');
+const roomsData = getData('/rooms', 'rooms');
+const bookingsData = getData('/bookings', 'bookings');
+
+function getData(endOfUrl, name) {
+  return fetch(`http://localhost:3001/api/v1${endOfUrl}`)
     .then(response => response.json())
     .then(data => data[name])
     .catch(error => displayErrorMessage(error))
 }
 
-Promise.all([customerData, bookingsData, roomsData])
+Promise.all([customerData, roomsData, bookingsData])
   .then(data => createHotel(data))
 
 
-}
-export default fetchAPIData;
+// export default fetchAPIData;

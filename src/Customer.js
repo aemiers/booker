@@ -10,18 +10,29 @@ class Customer {
     return this.name.split(' ', 1).join();
   }
 
-  // getPreviousBookings() {
+  getPreviousBookings(bookingsData, todaysDate) {
+    this.previousBookings = bookingsData.filter(booking => booking.date < todaysDate && booking.userID === this.id);
+  }
 
-  // }
+  getFutureBookings(bookingsData, todaysDate) {
+    this.futureBookings = bookingsData.filter(booking => booking.date >= todaysDate && booking.userID === this.id);
+  }
 
-  // getFutureBookings() {
+  getRoomNumbers(bookingData) {
+    return bookingData.map(booking => booking.roomNumber);
+  }
 
-  // }
-
-  // calculateTotalSpent() {
-
-  // }
-
+  calculateTotalSpent(roomsData) {
+    let roomCost = 0;
+    const allBookings = this.previousBookings.concat(this.futureBookings);
+    const foundRoomNumbers = this.getRoomNumbers(allBookings);
+    roomsData.forEach(room => {
+      if (foundRoomNumbers.includes(room.number)) {
+        roomCost += room.costPerNight
+      }
+    })
+    return roomCost
+  }
 }
 
 export default Customer;

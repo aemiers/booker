@@ -1,5 +1,6 @@
 import { expect } from 'chai';
 import Customer from '../src/Customer';
+import Hotel from '../src/Hotel';
 
 describe('Customer', () => {
   const customerData = [
@@ -13,19 +14,53 @@ describe('Customer', () => {
     },
   ]
 
+  const roomsData = [
+    {
+      "number": 1,
+      "roomType": "residential suite",
+      "bidet": true,
+      "bedSize": "queen",
+      "numBeds": 1,
+      "costPerNight": 358.4
+    },
+    {
+      "number": 2,
+      "roomType": "suite",
+      "bidet": false,
+      "bedSize": "full",
+      "numBeds": 2,
+      "costPerNight": 477.38
+    },
+    {
+      "number": 3,
+      "roomType": "single room",
+      "bidet": false,
+      "bedSize": "king",
+      "numBeds": 1,
+      "costPerNight": 491.14
+    },
+  ]
+
   const bookingsData = [
     {
       "id": "5fwrgu4i7k55hl6sz",
       "userID": 1,
       "date": "2020/04/22",
-      "roomNumber": 15,
+      "roomNumber": 2,
+      "roomServiceCharges": []
+    },
+    {
+      "id": "5fwrgu4i7k55hl6ab",
+      "userID": 1,
+      "date": "2020/04/23",
+      "roomNumber": 1,
       "roomServiceCharges": []
     },
     {
       "id": "5fwrgu4i7k55hl6t5",
       "userID": 1,
       "date": "2020/01/24",
-      "roomNumber": 24,
+      "roomNumber": 3,
       "roomServiceCharges": []
     },
   ]
@@ -63,26 +98,22 @@ describe('Customer', () => {
       expect(customerTwo.getCustomerFirstName()).to.equal("Rocio");
     });
 
-    // it('should be able to view previous bookings', () => {
+    it('should be able to view previous bookings', () => {
+      customerOne.getPreviousBookings(bookingsData, "2020/04/22");
+      expect(customerOne.previousBookings[0].id).to.deep.equal('5fwrgu4i7k55hl6t5');
+    });
 
-    // });
+    it('should be able to view future bookings', () => {
+      customerOne.getFutureBookings(bookingsData, "2020/04/22");
+      expect(customerOne.futureBookings[0].id).to.deep.equal("5fwrgu4i7k55hl6sz");
+      expect(customerOne.futureBookings[1].id).to.deep.equal("5fwrgu4i7k55hl6ab");
+    });
 
-    // it('should return a message if the customer has had no previous bookings', () => {
-
-
-    // });
-
-    // it('should be able to view future bookings', () => {
-
-    // });
-
-    // it('should return a message if the customer has had no future bookings', () => {
-
-    // });
-
-    // it('should be able to calculate the total spent on future and past bookings', () => {
-
-    // });
+    it('should be able to calculate the total spent on future and past bookings', () => {
+      customerOne.getPreviousBookings(bookingsData, "2020/04/22");
+      customerOne.getFutureBookings(bookingsData, "2020/04/22");
+      expect(customerOne.calculateTotalSpent(roomsData)).to.equal(1326.92);
+    });
 
   });
 });

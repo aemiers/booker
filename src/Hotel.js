@@ -19,7 +19,6 @@ class Hotel {
     const availableRooms = this.rooms.filter(room => !bookedRoomNumbers.includes(room.number));
     return availableRooms;
   }
-
 }
 
 

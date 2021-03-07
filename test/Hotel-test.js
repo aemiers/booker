@@ -41,7 +41,7 @@ describe('Hotel', () => {
     },
   ]
 
-  const bookingData = [
+  const bookingsData = [
     {
       "id": "5fwrgu4i7k55hl6sz",
       "userID": 1,
@@ -67,7 +67,7 @@ describe('Hotel', () => {
 
   const customerOne = new Customer(customerData[0]);
   const customerTwo = new Customer(customerData[1]);
-  const hotel = new Hotel(customerData, roomsData, bookingData);
+  const hotel = new Hotel(customerData, roomsData, bookingsData);
 
   describe('Properties', () => {
     it('should be a function', () => {
@@ -87,7 +87,7 @@ describe('Hotel', () => {
     });
 
     it('should have bookings', () => {
-      expect(hotel.bookings).to.deep.equal(bookingData);
+      expect(hotel.bookings).to.deep.equal(bookingsData);
     });
 
   });

@@ -14,38 +14,126 @@ import './images/search.svg';
 import './images/users.svg';
 import './images/shower.svg';
 // QUERY SELECTORS
-const welcomeSaying = document.querySelector('.welcome');
-const searchDateInput = document.querySelector('#searchDate');
 const searchSubmitBtn = document.querySelector('#searchSubmit');
+const searchDateInput = document.querySelector('#searchDate');
+// const searchSection = document.querySelector('#searchSection');
+// const upcomingBookingsSection = document.querySelector('#upcomingBookingsSection');
+// const pastBookingsSection = document.querySelector('#pastBookingsSection');
 const searchResultsBtn = document.querySelector('#searchResults');
 const upcomingBookingsBtn = document.querySelector('#upcomingBookings');
 const pastBookingsBtn = document.querySelector('#pastBookings');
 const myAccountBtn = document.querySelector('#myAccount');
 const reserveRoomBtn = document.querySelector('#reserveBtn');
+const roomCardSection = document.querySelector('#main');
 
 
+// EVENT LISTENERS
+searchSubmitBtn.addEventListener('click', updateSearchResults);
+searchDateInput.addEventListener('keydown', preventInvalidKeys);
+// upcomingBookingsBtn.addEventListener('click', displayUpcomingBookings);
+// pastBookingsBtn.addEventListener('click', displayPreviousBookings);
+
+upcomingBookingsBtn.addEventListener('click', function () {
+  displayBookings(customer.futureBookings)
+});
+pastBookingsBtn.addEventListener('click', function () {
+  displayBookings(customer.previousBookings)
+});
 
 // GLOBAL VARIABLES
 let hotel, customer;
 
 // FUNCTIONS
-const createHotel = (data) => {
+
+function preventInvalidKeys(event) {
+  var invalidCharacters = ['e', '+', '-'];
+  if (invalidCharacters.includes(event.key)) {
+    event.preventDefault();
+  }
+}
+function updateSearchResults() {
+  let userInputDate = searchDateInput.value.replace(/-/g, '/');
+  return userInputDate;
+}
+
+function createHotel(data) {
   hotel = new Hotel(data[0], data[1], data[2]);
-  console.log(data[2])
   createCustomer(data)
 }
 
-const createCustomer = (data) => {
+function createCustomer(data) {
   customer = new Customer(data[0][0])
   customer.getPreviousBookings(data[2], "2020/02/19");
-  customer.getFutureBookings(data[2], "2020/02/19")
+  customer.getFutureBookings(data[2], "2020/02/19");
+  // populatePage();
 }
 
+function addClass(element, className) {
+  element.classList.add(className || 'hidden');
+}
 
+function removeClass(element, className) {
+  element.classList.remove(className || 'hidden');
+}
 
+function populatePage() {
+  updateWelcome();
+}
 
+function updateWelcome() {
+  let welcomeSaying = document.getElementById('welcome');
+  const firstName = customer.getCustomerFirstName();
+  welcomeSaying.insertAdjacentHTML('beforeend', `${firstName}!`);
+}
 
+function resetHtml() {
+  roomCardSection.innerHTML = '';
+}
 
+function displayBookings(bookingArray) {
+  resetHtml();
+  bookingArray.forEach(booking => {
+    const matchingRoom = hotel.rooms.find(room => {
+      return room.number === booking.roomNumber
+    })
+    roomCardSection.insertAdjacentHTML('beforeend', `
+    <section class="room-card">
+      <img alt="room picture" src="./images/bedroom1.jpg" class="room-image">
+      <section class="middle-column-container">
+        <h2 class="room-type-card-header">${matchingRoom.roomType}</h2 >
+    <div class="room-specs">
+      <img alt="bed icon" src="./images/bed.svg" class="small-icon">
+        <p>${matchingRoom.numBeds} ${matchingRoom.bedSize} size bed</p>
+        </div>
+      <div class="room-specs">
+        <img alt="people icon" src="./images/users.svg" class="small-icon">
+          <p>Sleeps 2</p>
+        </div>
+        <div class="room-specs">
+          <img alt="shower icon" src="./images/shower.svg" class="small-icon">
+            <p>1 Bathroom</p>
+        </div>
+          <div class="room-specs">
+            <img alt="toilet icon" src="./images/toilet.svg" class="small-icon">
+              <p>Has Bidet</p>
+        </div>
+      </section>
+          <section class="end-column-container ">
+            <div class="expense-details">
+              <h2 class="expense">Expense Details:</h2>
+              <p class="expense">${booking.date}</p>
+              <h2 class="expense">$${matchingRoom.costPerNight}<span class="span-per-night"> total</span></h2>
+            </div>
+          </section>
+    </section>
+    `)
+  })
+}
+
+function displaySearchResults() {
+  resetHtml();
+
+}
 
 
 // STOP TRYING TO MAKE FETCH WORK

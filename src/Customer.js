@@ -12,12 +12,12 @@ class Customer {
 
   getPreviousBookings(bookingsData, todaysDate) {
     this.previousBookings = bookingsData.filter(booking => booking.date < todaysDate && booking.userID === this.id);
-    sortByMostRecent(this.previousBookings);
+    this.sortByMostRecent(this.previousBookings);
   }
 
   getFutureBookings(bookingsData, todaysDate) {
     this.futureBookings = bookingsData.filter(booking => booking.date >= todaysDate && booking.userID === this.id);
-    sortByMostRecent(this.futureBookings);
+    this.sortByMostRecent(this.futureBookings);
   }
 
   getRoomNumbers(bookingData) {

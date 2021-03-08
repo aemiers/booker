@@ -89,20 +89,24 @@ function resetHtml() {
   roomCardSection.innerHTML = '';
 }
 
-function checkForEmptyState(array) {
-  if (array.length === 0) {
-
+function checkForEmptyState(bookingArray) {
+  let emptyState = document.getElementById('empty');
+  if (bookingArray.length === 0) {
+    removeClass(emptyState, 'hidden');
+  } else {
+    addClass(emptyState, 'hidden');
   }
 }
 
 function displayBookings(bookingArray) {
   resetHtml();
+  // checkForEmptyState(bookingArray);
   bookingArray.forEach(booking => {
     const matchingRoom = hotel.rooms.find(room => {
       if (room.bidet === true) {
-        room.bidet = 'Yes';
+        room.bidet = 'Bidet Included';
       } else {
-        room.bidet = 'No';
+        room.bidet = 'No Bidet Included';
       }
       return room.number === booking.roomNumber
     })

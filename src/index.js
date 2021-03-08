@@ -16,9 +16,6 @@ import './images/shower.svg';
 // QUERY SELECTORS
 const searchSubmitBtn = document.querySelector('#searchSubmit');
 const searchDateInput = document.querySelector('#searchDate');
-// const searchSection = document.querySelector('#searchSection');
-// const upcomingBookingsSection = document.querySelector('#upcomingBookingsSection');
-// const pastBookingsSection = document.querySelector('#pastBookingsSection');
 const searchResultsBtn = document.querySelector('#searchResults');
 const upcomingBookingsBtn = document.querySelector('#upcomingBookings');
 const pastBookingsBtn = document.querySelector('#pastBookings');
@@ -94,6 +91,11 @@ function displayBookings(bookingArray) {
   resetHtml();
   bookingArray.forEach(booking => {
     const matchingRoom = hotel.rooms.find(room => {
+      if (room.bidet === true) {
+        room.bidet = 'Yes';
+      } else {
+        room.bidet = 'No';
+      }
       return room.number === booking.roomNumber
     })
     roomCardSection.insertAdjacentHTML('beforeend', `
@@ -115,7 +117,7 @@ function displayBookings(bookingArray) {
         </div>
           <div class="room-specs">
             <img alt="toilet icon" src="./images/toilet.svg" class="small-icon">
-              <p>Has Bidet</p>
+              <p>${matchingRoom.bidet}</p>
         </div>
       </section>
           <section class="end-column-container ">

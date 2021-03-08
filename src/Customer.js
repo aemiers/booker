@@ -12,23 +12,21 @@ class Customer {
 
   getPreviousBookings(bookingsData, todaysDate) {
     this.previousBookings = bookingsData.filter(booking => booking.date < todaysDate && booking.userID === this.id);
-    this.sortByMostRecent(this.previousBookings);
   }
 
   getFutureBookings(bookingsData, todaysDate) {
     this.futureBookings = bookingsData.filter(booking => booking.date >= todaysDate && booking.userID === this.id);
-    this.sortByMostRecent(this.futureBookings);
   }
 
   getRoomNumbers(bookingData) {
     return bookingData.map(booking => booking.roomNumber);
   }
 
-  sortByMostRecent(array) {
-    array.sort((a, b) => {
-      return new Date(b.date) - new Date(a.date);
-    })
-  }
+  // sortByMostRecent(array) {
+  //   array.sort((a, b) => {
+  //     return new Date(b.date) - new Date(a.date);
+  //   })
+  // }
 
   calculateTotalSpent(roomsData) {
     let roomCost = 0;

@@ -99,6 +99,7 @@ describe('Customer', () => {
 
     it('should be able to view previous bookings', () => {
       customerOne.getPreviousBookings(bookingsData, "2020/04/22");
+      console.log(customerOne.previousBookings)
       expect(customerOne.previousBookings[0].id).to.deep.equal('5fwrgu4i7k55hl6t5');
     });
 

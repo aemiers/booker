@@ -13,6 +13,8 @@ import './images/toilet.svg';
 import './images/search.svg';
 import './images/users.svg';
 import './images/shower.svg';
+import './images/ninja.svg';
+
 // QUERY SELECTORS
 const searchSubmitBtn = document.querySelector('#searchSubmit');
 const searchDateInput = document.querySelector('#searchDate');
@@ -85,6 +87,12 @@ function updateWelcome() {
 
 function resetHtml() {
   roomCardSection.innerHTML = '';
+}
+
+function checkForEmptyState(array) {
+  if (array.length === 0) {
+
+  }
 }
 
 function displayBookings(bookingArray) {

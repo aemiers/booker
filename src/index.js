@@ -17,13 +17,9 @@ import './images/ninja.svg';
 
 // QUERY SELECTORS
 const searchSpyglassBtn = document.querySelector('#searchSubmit');
-const searchResultsBtn = document.querySelector('#searchResults');
 const upcomingBookingsBtn = document.querySelector('#upcomingBookings');
 const pastBookingsBtn = document.querySelector('#pastBookings');
 const myAccountBtn = document.querySelector('#myAccount');
-
-// const reserveRoomBtns = document.querySelectorAll('.reserve-btn').forEach(btn => { btn.addEventListener('click', findButton) });
-
 const roomCardSection = document.querySelector('#roomCardContainer');
 const searchDateInput = document.querySelector('#searchDate');
 const emptyStateMessage = document.querySelector('#emptyMessage');
@@ -32,16 +28,11 @@ const accountSummaryPage = document.getElementById('accountSummary');
 
 // EVENT LISTENERS
 searchSpyglassBtn.addEventListener('click', displaySearchResults);
-searchResultsBtn.addEventListener('click', displaySearchPage);
 searchDateInput.addEventListener('change', preventInvalidKeys);
 searchDateInput.addEventListener('click', blockOldDates);
 myAccountBtn.addEventListener('click', showMyAccountInfo);
 filterContainer.addEventListener('click', filterResults);
-
-// reserveRoomBtns.addEventListener('click', findButton);
-
-
-
+roomCardSection.addEventListener('click', handleNewReservation);
 upcomingBookingsBtn.addEventListener('click', function () {
   displayBookings(customer.futureBookings);
 });
@@ -53,21 +44,16 @@ pastBookingsBtn.addEventListener('click', function () {
 let hotel, customer;
 
 // FUNCTIONS
-function findButton() {
-  console.log('click')
-}
-
-
-
 function createHotel(data) {
   hotel = new Hotel(data[0], data[1], data[2]);
-  createCustomer(data)
+  createCustomer(data);
 }
 
 function createCustomer(data) {
-  customer = new Customer(data[0][0])
-  customer.getPreviousBookings(data[2], "2020/02/19");
-  customer.getFutureBookings(data[2], "2020/02/19");
+  const today = getToday().replace(/-/g, '/');
+  customer = new Customer(data[0][2])
+  customer.getPreviousBookings(data[2], today);
+  customer.getFutureBookings(data[2], today);
   updateWelcome();
 }
 
@@ -75,6 +61,26 @@ function updateWelcome() {
   let welcomeSaying = document.getElementById('welcome');
   const firstName = customer.getCustomerFirstName();
   welcomeSaying.insertAdjacentHTML('beforeend', `${firstName}!`);
+}
+
+function getToday() {
+  let today = new Date();
+  let day = today.getDate();
+  let month = today.getMonth() + 1;
+  let year = today.getFullYear();
+  if (day < 10) {
+    day = '0' + day;
+  }
+  if (month < 10) {
+    month = '0' + month
+  }
+  today = year + '-' + month + '-' + day;
+  console.log(today)
+  return today;
+}
+
+function getSearchDate() {
+  return searchDateInput.value;
 }
 
 function resetHtml(location) {
@@ -86,11 +92,11 @@ function resetInput() {
 }
 
 function addClass(element, className) {
-  element.classList.add(className || 'hidden');
+  element.classList.add(className);
 }
 
 function removeClass(element, className) {
-  element.classList.remove(className || 'hidden');
+  element.classList.remove(className);
 }
 
 function filterColorHandler(element1, element2, element3, element4) {
@@ -110,17 +116,7 @@ function preventInvalidKeys(event) {
 
 function blockOldDates() {
   resetInput(searchDateInput);
-  let today = new Date();
-  let day = today.getDate();
-  let month = today.getMonth() + 1;
-  let year = today.getFullYear();
-  if (day < 10) {
-    day = '0' + day;
-  }
-  if (month < 10) {
-    month = '0' + month
-  }
-  today = year + '-' + month + '-' + day;
+  const today = getToday();
   document.getElementById("searchDate").setAttribute("min", today);
   colorSearchButton();
 }
@@ -133,8 +129,8 @@ function colorSearchButton() {
   }
 }
 
-function checkForEmptyState(bookingArray) {
-  if (bookingArray.length === 0) {
+function checkForEmptyState(array) {
+  if (array.length === 0) {
     removeClass(emptyStateMessage, 'hidden');
   } else {
     addClass(emptyStateMessage, 'hidden');
@@ -213,6 +209,12 @@ function displayBookings(bookingArray) {
   })
 }
 
+function displaySearchResults() {
+  const searchDate = getSearchDate().replace(/-/g, '/');
+  displaySearchPage();
+  generateSearchResultCards(searchDate);
+}
+
 function displaySearchPage() {
   resetHtml(roomCardSection);
   addClass(accountSummaryPage, 'hidden');
@@ -221,22 +223,16 @@ function displaySearchPage() {
   removeClass(filterContainer, "hidden");
 }
 
-function displaySearchResults() {
-  const searchDate = searchDateInput.value;
-  displaySearchPage();
-  generateSearchResultCards(searchDate);
-}
-
 function generateSearchResultCards(date, filterType) {
-  // console.log('filter type', filterType)
   let availableRooms;
   if (!filterType) {
     availableRooms = hotel.findAvailableRoomsOnDate(date);
-    // console.log('unfiltered', availableRooms)
   } else {
     availableRooms = hotel.filterByRoomType(searchDate, filterType);
-    // console.log('regular', availableRooms)
   }
+  checkForEmptyState(availableRooms);
+  console.log("rooms length", availableRooms.length)
+
   availableRooms.forEach(room => {
     updateBidetValues(room);
     let picSrc = assignPicture(room.roomType);
@@ -264,7 +260,7 @@ function generateSearchResultCards(date, filterType) {
       </section>
           <section class="end-column-container">
             <div class="reserve-options">
-              <button id="reserveBtn ${room.number}" class="reserve-btn ">Reserve Room</button>
+              <button id=${room.number} class="reserve-btn">Reserve Room</button>
               <h1 class="room-cost">$${room.costPerNight}<span class="span-per-night"> /night</span></h1>
             </div>
           </section>
@@ -274,7 +270,7 @@ function generateSearchResultCards(date, filterType) {
 }
 
 function filterResults(event) {
-  const searchDate = searchDateInput.value;
+  getSearchDate();
   const singleRoomBtn = document.getElementById('singleRoom');
   const resSuiteBtn = document.getElementById('resSuite');
   const jrSuiteBtn = document.getElementById('jrSuite');
@@ -306,6 +302,26 @@ function showMyAccountInfo() {
   roomCostTotalLocation.insertAdjacentHTML('afterbegin', `Total spent on rooms: $${roomCostTotal}`);
 }
 
+function getRoomNumberFromClick(event) {
+  if (event.target.className === 'reserve-btn') {
+    return event.target.id;
+  }
+}
+
+function handleNewReservation(event) {
+  const date = getSearchDate();
+  let newBooking = {
+    "userID": customer.id,
+    "date": getSearchDate().replace(/-/g, '/'),
+    "roomNumber": parseInt(getRoomNumberFromClick(event))
+  }
+  sendDataToStorage(newBooking);
+  customer.futureBookings.push(newBooking);
+  hotel.bookings.push(newBooking);
+  resetHtml(roomCardSection);
+  displaySearchResults();
+}
+
 // STOP TRYING TO MAKE FETCH WORK
 
 const displayErrorMessage = (error) => {
@@ -326,13 +342,13 @@ function getData(endOfUrl, name) {
 Promise.all([customerData, roomsData, bookingsData])
   .then(data => createHotel(data))
 
-function insertData(data) {
+function sendDataToStorage(data) {
   return fetch(`http://localhost:3001/api/v1/bookings`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data)
   })
     .then(response => response.json())
-    .then(data.console.log(data))
+    .then(data => console.log(data))
     .catch(error => displayErrorMessage(error))
 }

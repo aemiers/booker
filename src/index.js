@@ -16,39 +16,35 @@ import './images/shower.svg';
 import './images/ninja.svg';
 
 // QUERY SELECTORS
-const searchSubmitBtn = document.querySelector('#searchSubmit');
+const searchSpyglassBtn = document.querySelector('#searchSubmit');
 const searchResultsBtn = document.querySelector('#searchResults');
 const upcomingBookingsBtn = document.querySelector('#upcomingBookings');
 const pastBookingsBtn = document.querySelector('#pastBookings');
 const myAccountBtn = document.querySelector('#myAccount');
-const reserveRoomBtn = document.querySelector('#reserveBtn');
+
+const reserveRoomBtns = document.querySelectorAll('.reserve-btn').forEach(btn => { btn.addEventListener('click', findButton) });
+
 const roomCardSection = document.querySelector('#roomCardContainer');
 const searchDateInput = document.querySelector('#searchDate');
 const emptyStateMessage = document.querySelector('#emptyMessage');
-
-const singleRoomFilterBtn = document.querySelector('#singleRoom');
-const resSuiteFilterBtn = document.querySelector('#resSuite');
-const jrSuiteFilterBtn = document.querySelector('#jrSuite');
-const suiteFilterBtn = document.querySelector('#suite');
-
+const filterContainer = document.querySelector('#filterContainer');
+const accountSummaryPage = document.getElementById('accountSummary');
 
 // EVENT LISTENERS
-searchSubmitBtn.addEventListener('click', displaySearchResults);
+searchSpyglassBtn.addEventListener('click', displaySearchResults);
 searchResultsBtn.addEventListener('click', displaySearchPage);
 searchDateInput.addEventListener('change', preventInvalidKeys);
 searchDateInput.addEventListener('click', blockOldDates);
 myAccountBtn.addEventListener('click', showMyAccountInfo);
+filterContainer.addEventListener('click', filterResults);
 
-singleRoomFilterBtn.addEventListener('click', filterResults);
-resSuiteFilterBtn.addEventListener('click', filterResults);
-jrSuiteFilterBtn.addEventListener('click', filterResults);
-suiteFilterBtn.addEventListener('click', filterResults);
+// reserveRoomBtns.addEventListener('click', findButton);
+
 
 
 upcomingBookingsBtn.addEventListener('click', function () {
   displayBookings(customer.futureBookings);
 });
-
 pastBookingsBtn.addEventListener('click', function () {
   displayBookings(customer.previousBookings);
 });
@@ -57,6 +53,52 @@ pastBookingsBtn.addEventListener('click', function () {
 let hotel, customer;
 
 // FUNCTIONS
+function findButton() {
+  console.log('click')
+}
+
+
+
+function createHotel(data) {
+  hotel = new Hotel(data[0], data[1], data[2]);
+  createCustomer(data)
+}
+
+function createCustomer(data) {
+  customer = new Customer(data[0][0])
+  customer.getPreviousBookings(data[2], "2020/02/19");
+  customer.getFutureBookings(data[2], "2020/02/19");
+  updateWelcome();
+}
+
+function updateWelcome() {
+  let welcomeSaying = document.getElementById('welcome');
+  const firstName = customer.getCustomerFirstName();
+  welcomeSaying.insertAdjacentHTML('beforeend', `${firstName}!`);
+}
+
+function resetHtml(location) {
+  location.innerHTML = '';
+}
+
+function resetInput() {
+  location.value = '';
+}
+
+function addClass(element, className) {
+  element.classList.add(className || 'hidden');
+}
+
+function removeClass(element, className) {
+  element.classList.remove(className || 'hidden');
+}
+
+function filterColorHandler() {
+  addClass(element1, hidden);
+  addClass(element1, hidden);
+  addClass(element1, hidden);
+  removeClass(element1, hidden);
+}
 
 function preventInvalidKeys(event) {
   var invalidCharacters = ['e', '+', '-'];
@@ -65,19 +107,6 @@ function preventInvalidKeys(event) {
   }
   colorSearchButton();
 }
-
-function colorSearchButton() {
-  console.log(searchDateInput.value)
-  if (searchDateInput.value !== "" && ) {
-    removeClass(searchSubmitBtn, "disabled");
-  } else {
-    addClass(searchSubmitBtn, "disabled");
-  }
-}
-
-// function formatCurrentDate() {
-//   return new Date().toJSON().slice(0, 10).replace(/-/g, '/');
-// }
 
 function blockOldDates() {
   resetInput(searchDateInput);
@@ -96,47 +125,12 @@ function blockOldDates() {
   colorSearchButton();
 }
 
-function updateSearchResults() {
-  let userInputDate = searchDateInput.value.replace(/-/g, '/');
-  return userInputDate;
-}
-
-function createHotel(data) {
-  hotel = new Hotel(data[0], data[1], data[2]);
-  createCustomer(data)
-}
-
-function createCustomer(data) {
-  customer = new Customer(data[0][0])
-  customer.getPreviousBookings(data[2], "2020/02/19");
-  customer.getFutureBookings(data[2], "2020/02/19");
-  updateWelcome();
-}
-
-function addClass(element, className) {
-  element.classList.add(className || 'hidden');
-}
-
-function removeClass(element, className) {
-  element.classList.remove(className || 'hidden');
-}
-
-// function populatePage() {
-//   updateWelcome();
-// }
-
-function updateWelcome() {
-  let welcomeSaying = document.getElementById('welcome');
-  const firstName = customer.getCustomerFirstName();
-  welcomeSaying.insertAdjacentHTML('beforeend', `${firstName}!`);
-}
-
-function resetHtml(location) {
-  location.innerHTML = '';
-}
-
-function resetInput() {
-  location.value = '';
+function colorSearchButton() {
+  if (searchDateInput.value !== "") {
+    removeClass(searchSpyglassBtn, "disabled");
+  } else {
+    addClass(searchSpyglassBtn, "disabled");
+  }
 }
 
 function checkForEmptyState(bookingArray) {
@@ -169,10 +163,15 @@ function assignPicture(roomElement) {
   return picSrc;
 }
 
-function displayBookings(bookingArray) {
+function loadBookingsPages(bookingArray) {
   resetHtml(roomCardSection);
-  customer.futureBookings = [];
-  // checkForEmptyState(bookingArray);
+  addClass(filterContainer, 'hidden');
+  addClass(accountSummaryPage, 'hidden');
+  checkForEmptyState(bookingArray);
+}
+
+function displayBookings(bookingArray) {
+  loadBookingsPages(bookingArray);
   bookingArray.forEach(booking => {
     let picSrc = "";
     const matchingRoom = hotel.rooms.find(room => {
@@ -215,17 +214,29 @@ function displayBookings(bookingArray) {
 }
 
 function displaySearchPage() {
-  let filterContainer = document.getElementById('filterContainer');
   resetHtml(roomCardSection);
+  addClass(accountSummaryPage, 'hidden');
+  addClass(searchSpyglassBtn, "disabled");
+  removeClass(emptyStateMessage, "hidden");
   removeClass(filterContainer, "hidden");
-  addClass(searchSubmitBtn, "disabled");
 }
 
 function displaySearchResults() {
-  resetHtml(roomCardSection);
-  const date = searchDateInput.value;
-  const availableRooms = hotel.findAvailableRoomsOnDate(date)
-  // console.log(availableRooms)
+  const searchDate = searchDateInput.value;
+  displaySearchPage();
+  generateSearchResultCards(searchDate);
+}
+
+function generateSearchResultCards(date, filterType) {
+  console.log('filter type', filterType)
+  let availableRooms;
+  if (!filterType) {
+    availableRooms = hotel.findAvailableRoomsOnDate(date);
+    console.log('unfiltered', availableRooms)
+  } else {
+    availableRooms = hotel.filterByRoomType(searchDate, filterType);
+    console.log('regular', availableRooms)
+  }
   availableRooms.forEach(room => {
     updateBidetValues(room);
     let picSrc = assignPicture(room.roomType);
@@ -253,30 +264,37 @@ function displaySearchResults() {
       </section>
           <section class="end-column-container">
             <div class="reserve-options">
-              <button id="reserveBtn" class="reserve-btn ">Reserve Room</button>
+              <button id="reserveBtn ${room.number}" class="reserve-btn ">Reserve Room</button>
               <h1 class="room-cost">$${room.costPerNight}<span class="span-per-night"> /night</span></h1>
             </div>
           </section>
     </section>
     `)
-    // checkForEmptyState(availableRooms);
-
   })
 }
 
-function filterResults() {
-  const clickedButton =
-    addClass()
+function filterResults(event) {
+  const searchDate = searchDateInput.value;
+  displaySearchPage();
+  if (event.target.id === 'singleRoom') {
+    generateSearchResultCards(searchDate, 'single room');
+  } else if (event.target.id === 'resSuite') {
+    generateSearchResultCards(searchDate, 'residential suite');
+  } else if (event.target.id === 'jrSuite') {
+    generateSearchResultCards(searchDate, 'junior suite');
+  } else if (event.target.id === 'suite') {
+    generateSearchResultCards(searchDate, 'suite');
+  }
 }
 
 function showMyAccountInfo() {
-  const accountSummaryPage = document.getElementById('accountSummary');
+  resetHtml(roomCardSection);
   const roomCostTotalLocation = document.getElementById('totalSpent');
   const roomCostTotal = customer.calculateTotalSpent(hotel.rooms);
-  // resetHtml(roomCostTotalLocation);
+  resetHtml(roomCostTotalLocation);
   addClass(emptyStateMessage, 'hidden');
   removeClass(accountSummaryPage, "hidden");
-  roomCostTotalLocation.innerHTML('beforeend', `${roomCostTotal}`);
+  roomCostTotalLocation.insertAdjacentHTML('afterbegin', `Total spent on rooms: $${roomCostTotal}`);
 }
 
 // STOP TRYING TO MAKE FETCH WORK

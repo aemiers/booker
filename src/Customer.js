@@ -21,16 +21,22 @@ class Customer {
 
   getFutureBookings(bookingsData, todaysDate) {
     let unorganizedFutureBookings = bookingsData.filter(booking => booking.date >= todaysDate && booking.userID === this.id);
-    this.futureBookings = this.sortByMostRecent(unorganizedFutureBookings);
+    this.futureBookings = this.sortByUpcoming(unorganizedFutureBookings);
   }
 
   sortByMostRecent(array) {
-    let organizedData = array.sort((a, b) => {
+    const organizedData = array.sort((a, b) => {
       return (new Date(b.date).getTime()) - (new Date(a.date).getTime());
     })
     return organizedData;
   }
 
+  sortByUpcoming(array) {
+    const upcomingOrganizedData = array.sort((a, b) => {
+      return (new Date(a.date).getTime()) - (new Date(b.date).getTime());
+    })
+    return upcomingOrganizedData;
+  }
 
   calculateTotalSpent(roomsData) {
     let roomCost = 0;

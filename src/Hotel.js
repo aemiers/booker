@@ -3,6 +3,7 @@ class Hotel {
     this.customers = customers;
     this.rooms = rooms;
     this.bookings = bookings;
+    this.selectedSearchDate = "";
   }
 
   findCustomerById(searchNumber) {
@@ -15,13 +16,18 @@ class Hotel {
   }
 
   findAvailableRoomsOnDate(searchDate) {
-
     const bookedRoomNumbers = this.bookings.filter(bookings => bookings.date ===
       searchDate).map(bookings => bookings.roomNumber);
     const availableRooms = this.rooms.filter(room => !bookedRoomNumbers.includes(room.number));
-    console.log(availableRooms)
+    return;
+  }
 
-    return availableRooms;
+  filterByRoomType(searchDate, filterType) {
+    this.findAvailableRoomsOnDate(searchDate);
+    const filteredRooms = this.rooms.filter(room => {
+      return room.roomType === filterType;
+    })
+    return filteredRooms;
   }
 }
 

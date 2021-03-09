@@ -111,7 +111,7 @@ describe('Customer', () => {
     it('should be able to calculate the total spent on future and past bookings', () => {
       customerOne.getPreviousBookings(bookingsData, "2020/04/22");
       customerOne.getFutureBookings(bookingsData, "2020/04/22");
-      expect(customerOne.calculateTotalSpent(roomsData)).to.equal(1326.92);
+      expect(customerOne.calculateTotalSpent(roomsData)).to.equal('1326.92');
     });
   });
 });

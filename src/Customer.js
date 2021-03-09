@@ -10,16 +10,32 @@ class Customer {
     return this.name.split(' ', 1).join();
   }
 
+  getRoomNumbers(bookingData) {
+    return bookingData.map(booking => booking.roomNumber);
+  }
+
   getPreviousBookings(bookingsData, todaysDate) {
-    this.previousBookings = bookingsData.filter(booking => booking.date < todaysDate && booking.userID === this.id);
+    let unorganizedPreviousBookings = bookingsData.filter(booking => booking.date < todaysDate && booking.userID === this.id);
+    this.previousBookings = this.sortByMostRecent(unorganizedPreviousBookings);
   }
 
   getFutureBookings(bookingsData, todaysDate) {
-    this.futureBookings = bookingsData.filter(booking => booking.date >= todaysDate && booking.userID === this.id);
+    let unorganizedFutureBookings = bookingsData.filter(booking => booking.date >= todaysDate && booking.userID === this.id);
+    this.futureBookings = this.sortByUpcoming(unorganizedFutureBookings);
   }
 
-  getRoomNumbers(bookingData) {
-    return bookingData.map(booking => booking.roomNumber);
+  sortByMostRecent(array) {
+    const organizedData = array.sort((a, b) => {
+      return (new Date(b.date).getTime()) - (new Date(a.date).getTime());
+    })
+    return organizedData;
+  }
+
+  sortByUpcoming(array) {
+    const upcomingOrganizedData = array.sort((a, b) => {
+      return (new Date(a.date).getTime()) - (new Date(b.date).getTime());
+    })
+    return upcomingOrganizedData;
   }
 
   calculateTotalSpent(roomsData) {
@@ -31,7 +47,7 @@ class Customer {
         roomCost += room.costPerNight;
       }
     })
-    return roomCost;
+    return roomCost.toFixed(2);
   }
 }
 

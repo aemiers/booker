@@ -3,6 +3,7 @@ class Hotel {
     this.customers = customers;
     this.rooms = rooms;
     this.bookings = bookings;
+    this.selectedSearchDate = "";
   }
 
   findCustomerById(searchNumber) {
@@ -19,7 +20,14 @@ class Hotel {
     const availableRooms = this.rooms.filter(room => !bookedRoomNumbers.includes(room.number));
     return availableRooms;
   }
-}
 
+  filterByRoomType(searchDate, filterType) {
+    this.findAvailableRoomsOnDate(searchDate);
+    const filteredRooms = this.rooms.filter(room => {
+      return room.roomType === filterType;
+    })
+    return filteredRooms;
+  }
+}
 
 export default Hotel;

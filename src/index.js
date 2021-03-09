@@ -62,6 +62,10 @@ function updateWelcome() {
   welcomeSaying.insertAdjacentHTML('beforeend', `${firstName}!`);
 }
 
+function getSearchDate() {
+  return searchDateInput.value;
+}
+
 function resetHtml(location) {
   location.innerHTML = '';
 }
@@ -199,7 +203,7 @@ function displayBookings(bookingArray) {
 }
 
 function displaySearchResults() {
-  const searchDate = searchDateInput.value;
+  const searchDate = getSearchDate().replace(/-/g, '/')
   displaySearchPage();
   generateSearchResultCards(searchDate);
 }
@@ -220,6 +224,7 @@ function generateSearchResultCards(date, filterType) {
     availableRooms = hotel.filterByRoomType(searchDate, filterType);
   }
   checkForEmptyState(availableRooms);
+  console.log("rooms length", availableRooms.length)
 
   availableRooms.forEach(room => {
     updateBidetValues(room);
@@ -255,10 +260,6 @@ function generateSearchResultCards(date, filterType) {
     </section>
     `)
   })
-}
-
-function getSearchDate() {
-  return searchDateInput.value;
 }
 
 function filterResults(event) {
@@ -301,6 +302,7 @@ function getRoomNumberFromClick(event) {
 }
 
 function handleNewReservation(event) {
+  const date = getSearchDate();
   let newBooking = {
     "userID": customer.id,
     "date": getSearchDate().replace(/-/g, '/'),
@@ -308,7 +310,9 @@ function handleNewReservation(event) {
   }
   sendDataToStorage(newBooking);
   customer.futureBookings.push(newBooking);
-  console.log(customer.futureBookings)
+  hotel.bookings.push(newBooking);
+  resetHtml(roomCardSection);
+  displaySearchResults();
 }
 
 // STOP TRYING TO MAKE FETCH WORK

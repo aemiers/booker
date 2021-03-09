@@ -46,13 +46,14 @@ let hotel, customer;
 // FUNCTIONS
 function createHotel(data) {
   hotel = new Hotel(data[0], data[1], data[2]);
-  createCustomer(data)
+  createCustomer(data);
 }
 
 function createCustomer(data) {
-  customer = new Customer(data[0][0])
-  customer.getPreviousBookings(data[2], "2020/02/19");
-  customer.getFutureBookings(data[2], "2020/02/19");
+  const today = getToday().replace(/-/g, '/');
+  customer = new Customer(data[0][2])
+  customer.getPreviousBookings(data[2], today);
+  customer.getFutureBookings(data[2], today);
   updateWelcome();
 }
 
@@ -60,6 +61,22 @@ function updateWelcome() {
   let welcomeSaying = document.getElementById('welcome');
   const firstName = customer.getCustomerFirstName();
   welcomeSaying.insertAdjacentHTML('beforeend', `${firstName}!`);
+}
+
+function getToday() {
+  let today = new Date();
+  let day = today.getDate();
+  let month = today.getMonth() + 1;
+  let year = today.getFullYear();
+  if (day < 10) {
+    day = '0' + day;
+  }
+  if (month < 10) {
+    month = '0' + month
+  }
+  today = year + '-' + month + '-' + day;
+  console.log(today)
+  return today;
 }
 
 function getSearchDate() {
@@ -99,17 +116,7 @@ function preventInvalidKeys(event) {
 
 function blockOldDates() {
   resetInput(searchDateInput);
-  let today = new Date();
-  let day = today.getDate();
-  let month = today.getMonth() + 1;
-  let year = today.getFullYear();
-  if (day < 10) {
-    day = '0' + day;
-  }
-  if (month < 10) {
-    month = '0' + month
-  }
-  today = year + '-' + month + '-' + day;
+  const today = getToday();
   document.getElementById("searchDate").setAttribute("min", today);
   colorSearchButton();
 }
@@ -203,7 +210,7 @@ function displayBookings(bookingArray) {
 }
 
 function displaySearchResults() {
-  const searchDate = getSearchDate().replace(/-/g, '/')
+  const searchDate = getSearchDate().replace(/-/g, '/');
   displaySearchPage();
   generateSearchResultCards(searchDate);
 }

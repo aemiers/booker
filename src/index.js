@@ -21,9 +21,6 @@ const searchResultsBtn = document.querySelector('#searchResults');
 const upcomingBookingsBtn = document.querySelector('#upcomingBookings');
 const pastBookingsBtn = document.querySelector('#pastBookings');
 const myAccountBtn = document.querySelector('#myAccount');
-
-// const reserveRoomBtns = document.querySelectorAll('.reserve-btn').forEach(btn => { btn.addEventListener('click', findButton) });
-
 const roomCardSection = document.querySelector('#roomCardContainer');
 const searchDateInput = document.querySelector('#searchDate');
 const emptyStateMessage = document.querySelector('#emptyMessage');
@@ -37,8 +34,7 @@ searchDateInput.addEventListener('change', preventInvalidKeys);
 searchDateInput.addEventListener('click', blockOldDates);
 myAccountBtn.addEventListener('click', showMyAccountInfo);
 filterContainer.addEventListener('click', filterResults);
-
-// reserveRoomBtns.addEventListener('click', findButton);
+roomCardSection.addEventListener('click', handleNewReservation);
 
 
 
@@ -53,12 +49,6 @@ pastBookingsBtn.addEventListener('click', function () {
 let hotel, customer;
 
 // FUNCTIONS
-function findButton() {
-  console.log('click')
-}
-
-
-
 function createHotel(data) {
   hotel = new Hotel(data[0], data[1], data[2]);
   createCustomer(data)
@@ -228,14 +218,11 @@ function displaySearchResults() {
 }
 
 function generateSearchResultCards(date, filterType) {
-  // console.log('filter type', filterType)
   let availableRooms;
   if (!filterType) {
     availableRooms = hotel.findAvailableRoomsOnDate(date);
-    // console.log('unfiltered', availableRooms)
   } else {
     availableRooms = hotel.filterByRoomType(searchDate, filterType);
-    // console.log('regular', availableRooms)
   }
   availableRooms.forEach(room => {
     updateBidetValues(room);
@@ -264,7 +251,7 @@ function generateSearchResultCards(date, filterType) {
       </section>
           <section class="end-column-container">
             <div class="reserve-options">
-              <button id="reserveBtn ${room.number}" class="reserve-btn ">Reserve Room</button>
+              <button id=${room.number} class="reserve-btn">Reserve Room</button>
               <h1 class="room-cost">$${room.costPerNight}<span class="span-per-night"> /night</span></h1>
             </div>
           </section>
@@ -273,8 +260,12 @@ function generateSearchResultCards(date, filterType) {
   })
 }
 
+function getSearchDate() {
+  return searchDateInput.value;
+}
+
 function filterResults(event) {
-  const searchDate = searchDateInput.value;
+  getSearchDate();
   const singleRoomBtn = document.getElementById('singleRoom');
   const resSuiteBtn = document.getElementById('resSuite');
   const jrSuiteBtn = document.getElementById('jrSuite');
@@ -306,6 +297,23 @@ function showMyAccountInfo() {
   roomCostTotalLocation.insertAdjacentHTML('afterbegin', `Total spent on rooms: $${roomCostTotal}`);
 }
 
+function getRoomNumberFromClick(event) {
+  if (event.target.className === 'reserve-btn') {
+    return event.target.id;
+  }
+}
+
+function handleNewReservation(event) {
+  let newBooking = {
+    "userID": customer.id,
+    "date": getSearchDate().replace(/-/g, '/'),
+    "roomNumber": parseInt(getRoomNumberFromClick(event))
+  }
+  sendDataToStorage(newBooking);
+  customer.futureBookings.push(newBooking);
+  console.log(customer.futureBookings)
+}
+
 // STOP TRYING TO MAKE FETCH WORK
 
 const displayErrorMessage = (error) => {
@@ -326,13 +334,13 @@ function getData(endOfUrl, name) {
 Promise.all([customerData, roomsData, bookingsData])
   .then(data => createHotel(data))
 
-function insertData(data) {
+function sendDataToStorage(data) {
   return fetch(`http://localhost:3001/api/v1/bookings`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data)
   })
     .then(response => response.json())
-    .then(data.console.log(data))
+    .then(data => console.log(data))
     .catch(error => displayErrorMessage(error))
 }

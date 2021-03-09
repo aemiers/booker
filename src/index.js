@@ -34,8 +34,8 @@ const suiteFilterBtn = document.querySelector('#suite');
 
 // EVENT LISTENERS
 searchSubmitBtn.addEventListener('click', displaySearchResults);
-searchResultsBtn.addEventListener('click', displaySearchResults);
-searchDateInput.addEventListener('keydown', preventInvalidKeys);
+searchResultsBtn.addEventListener('click', displaySearchPage);
+searchDateInput.addEventListener('change', preventInvalidKeys);
 searchDateInput.addEventListener('click', blockOldDates);
 myAccountBtn.addEventListener('click', showMyAccountInfo);
 
@@ -57,14 +57,6 @@ pastBookingsBtn.addEventListener('click', function () {
 let hotel, customer;
 
 // FUNCTIONS
-function showMyAccountInfo() {
-  const accountSummaryPage = document.getElementById('accountSummary');
-  const roomCostTotalLocation = document.getElementById('totalSpent');
-  const roomCostTotal = customer.calculateTotalSpent(hotel.rooms);
-  addClass(emptyStateMessage, 'hidden');
-  removeClass(accountSummaryPage, "hidden");
-  roomCostTotalLocation.insertAdjacentHTML('beforeend', `${roomCostTotal}`);
-}
 
 function preventInvalidKeys(event) {
   var invalidCharacters = ['e', '+', '-'];
@@ -75,7 +67,8 @@ function preventInvalidKeys(event) {
 }
 
 function colorSearchButton() {
-  if (searchDateInput !== "") {
+  console.log(searchDateInput.value)
+  if (searchDateInput.value !== "" && ) {
     removeClass(searchSubmitBtn, "disabled");
   } else {
     addClass(searchSubmitBtn, "disabled");
@@ -118,8 +111,6 @@ function createCustomer(data) {
   customer.getPreviousBookings(data[2], "2020/02/19");
   customer.getFutureBookings(data[2], "2020/02/19");
   updateWelcome();
-
-  // getCurrentDate();
 }
 
 function addClass(element, className) {
@@ -140,8 +131,8 @@ function updateWelcome() {
   welcomeSaying.insertAdjacentHTML('beforeend', `${firstName}!`);
 }
 
-function resetHtml() {
-  roomCardSection.innerHTML = '';
+function resetHtml(location) {
+  location.innerHTML = '';
 }
 
 function resetInput() {
@@ -179,7 +170,8 @@ function assignPicture(roomElement) {
 }
 
 function displayBookings(bookingArray) {
-  resetHtml();
+  resetHtml(roomCardSection);
+  customer.futureBookings = [];
   // checkForEmptyState(bookingArray);
   bookingArray.forEach(booking => {
     let picSrc = "";
@@ -222,13 +214,18 @@ function displayBookings(bookingArray) {
   })
 }
 
-function displaySearchResults() {
+function displaySearchPage() {
   let filterContainer = document.getElementById('filterContainer');
-  resetHtml();
+  resetHtml(roomCardSection);
   removeClass(filterContainer, "hidden");
   addClass(searchSubmitBtn, "disabled");
+}
+
+function displaySearchResults() {
+  resetHtml(roomCardSection);
   const date = searchDateInput.value;
   const availableRooms = hotel.findAvailableRoomsOnDate(date)
+  // console.log(availableRooms)
   availableRooms.forEach(room => {
     updateBidetValues(room);
     let picSrc = assignPicture(room.roomType);
@@ -272,6 +269,15 @@ function filterResults() {
     addClass()
 }
 
+function showMyAccountInfo() {
+  const accountSummaryPage = document.getElementById('accountSummary');
+  const roomCostTotalLocation = document.getElementById('totalSpent');
+  const roomCostTotal = customer.calculateTotalSpent(hotel.rooms);
+  // resetHtml(roomCostTotalLocation);
+  addClass(emptyStateMessage, 'hidden');
+  removeClass(accountSummaryPage, "hidden");
+  roomCostTotalLocation.innerHTML('beforeend', `${roomCostTotal}`);
+}
 
 // STOP TRYING TO MAKE FETCH WORK
 

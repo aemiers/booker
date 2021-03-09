@@ -16,10 +16,9 @@ class Hotel {
   }
 
   findAvailableRoomsOnDate(searchDate) {
-    const bookedRoomNumbers = this.bookings.filter(bookings => bookings.date ===
-      searchDate).map(bookings => bookings.roomNumber);
+    const bookedRoomNumbers = this.bookings.filter(bookings => bookings.date === searchDate).map(bookings => bookings.roomNumber);
     const availableRooms = this.rooms.filter(room => !bookedRoomNumbers.includes(room.number));
-    return;
+    return availableRooms;
   }
 
   filterByRoomType(searchDate, filterType) {

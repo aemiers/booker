@@ -22,7 +22,7 @@ const upcomingBookingsBtn = document.querySelector('#upcomingBookings');
 const pastBookingsBtn = document.querySelector('#pastBookings');
 const myAccountBtn = document.querySelector('#myAccount');
 
-const reserveRoomBtns = document.querySelectorAll('.reserve-btn').forEach(btn => { btn.addEventListener('click', findButton) });
+// const reserveRoomBtns = document.querySelectorAll('.reserve-btn').forEach(btn => { btn.addEventListener('click', findButton) });
 
 const roomCardSection = document.querySelector('#roomCardContainer');
 const searchDateInput = document.querySelector('#searchDate');
@@ -93,11 +93,11 @@ function removeClass(element, className) {
   element.classList.remove(className || 'hidden');
 }
 
-function filterColorHandler() {
-  addClass(element1, hidden);
-  addClass(element1, hidden);
-  addClass(element1, hidden);
-  removeClass(element1, hidden);
+function filterColorHandler(element1, element2, element3, element4) {
+  removeClass(element1, "active");
+  removeClass(element2, "active");
+  removeClass(element3, "active");
+  addClass(element4, "active");
 }
 
 function preventInvalidKeys(event) {
@@ -228,14 +228,14 @@ function displaySearchResults() {
 }
 
 function generateSearchResultCards(date, filterType) {
-  console.log('filter type', filterType)
+  // console.log('filter type', filterType)
   let availableRooms;
   if (!filterType) {
     availableRooms = hotel.findAvailableRoomsOnDate(date);
-    console.log('unfiltered', availableRooms)
+    // console.log('unfiltered', availableRooms)
   } else {
     availableRooms = hotel.filterByRoomType(searchDate, filterType);
-    console.log('regular', availableRooms)
+    // console.log('regular', availableRooms)
   }
   availableRooms.forEach(room => {
     updateBidetValues(room);
@@ -275,14 +275,23 @@ function generateSearchResultCards(date, filterType) {
 
 function filterResults(event) {
   const searchDate = searchDateInput.value;
+  const singleRoomBtn = document.getElementById('singleRoom');
+  const resSuiteBtn = document.getElementById('resSuite');
+  const jrSuiteBtn = document.getElementById('jrSuite');
+  const suiteBtn = document.getElementById('suite');
+
   displaySearchPage();
   if (event.target.id === 'singleRoom') {
+    filterColorHandler(suiteBtn, jrSuiteBtn, resSuiteBtn, singleRoomBtn);
     generateSearchResultCards(searchDate, 'single room');
   } else if (event.target.id === 'resSuite') {
+    filterColorHandler(singleRoomBtn, suiteBtn, jrSuiteBtn, resSuiteBtn);
     generateSearchResultCards(searchDate, 'residential suite');
   } else if (event.target.id === 'jrSuite') {
+    filterColorHandler(resSuiteBtn, singleRoomBtn, suiteBtn, jrSuiteBtn);
     generateSearchResultCards(searchDate, 'junior suite');
   } else if (event.target.id === 'suite') {
+    filterColorHandler(jrSuiteBtn, resSuiteBtn, singleRoomBtn, suiteBtn);
     generateSearchResultCards(searchDate, 'suite');
   }
 }

@@ -192,8 +192,8 @@ main {
   padding: 50px 0 150px 0;
 }
 
-.activeBtn {
-  background-color: $accent-orange;
+.active {
+  background-color: $accent-orange !important;
 }
 
 .disabled {

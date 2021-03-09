@@ -17,7 +17,6 @@ import './images/ninja.svg';
 
 // QUERY SELECTORS
 const searchSpyglassBtn = document.querySelector('#searchSubmit');
-const searchResultsBtn = document.querySelector('#searchResults');
 const upcomingBookingsBtn = document.querySelector('#upcomingBookings');
 const pastBookingsBtn = document.querySelector('#pastBookings');
 const myAccountBtn = document.querySelector('#myAccount');
@@ -29,15 +28,11 @@ const accountSummaryPage = document.getElementById('accountSummary');
 
 // EVENT LISTENERS
 searchSpyglassBtn.addEventListener('click', displaySearchResults);
-searchResultsBtn.addEventListener('click', displaySearchPage);
 searchDateInput.addEventListener('change', preventInvalidKeys);
 searchDateInput.addEventListener('click', blockOldDates);
 myAccountBtn.addEventListener('click', showMyAccountInfo);
 filterContainer.addEventListener('click', filterResults);
 roomCardSection.addEventListener('click', handleNewReservation);
-
-
-
 upcomingBookingsBtn.addEventListener('click', function () {
   displayBookings(customer.futureBookings);
 });
@@ -76,11 +71,11 @@ function resetInput() {
 }
 
 function addClass(element, className) {
-  element.classList.add(className || 'hidden');
+  element.classList.add(className);
 }
 
 function removeClass(element, className) {
-  element.classList.remove(className || 'hidden');
+  element.classList.remove(className);
 }
 
 function filterColorHandler(element1, element2, element3, element4) {
@@ -123,8 +118,8 @@ function colorSearchButton() {
   }
 }
 
-function checkForEmptyState(bookingArray) {
-  if (bookingArray.length === 0) {
+function checkForEmptyState(array) {
+  if (array.length === 0) {
     removeClass(emptyStateMessage, 'hidden');
   } else {
     addClass(emptyStateMessage, 'hidden');
@@ -203,18 +198,18 @@ function displayBookings(bookingArray) {
   })
 }
 
+function displaySearchResults() {
+  const searchDate = searchDateInput.value;
+  displaySearchPage();
+  generateSearchResultCards(searchDate);
+}
+
 function displaySearchPage() {
   resetHtml(roomCardSection);
   addClass(accountSummaryPage, 'hidden');
   addClass(searchSpyglassBtn, "disabled");
   removeClass(emptyStateMessage, "hidden");
   removeClass(filterContainer, "hidden");
-}
-
-function displaySearchResults() {
-  const searchDate = searchDateInput.value;
-  displaySearchPage();
-  generateSearchResultCards(searchDate);
 }
 
 function generateSearchResultCards(date, filterType) {
@@ -224,6 +219,8 @@ function generateSearchResultCards(date, filterType) {
   } else {
     availableRooms = hotel.filterByRoomType(searchDate, filterType);
   }
+  checkForEmptyState(availableRooms);
+
   availableRooms.forEach(room => {
     updateBidetValues(room);
     let picSrc = assignPicture(room.roomType);

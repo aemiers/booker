@@ -22,13 +22,28 @@ const upcomingBookingsBtn = document.querySelector('#upcomingBookings');
 const pastBookingsBtn = document.querySelector('#pastBookings');
 const myAccountBtn = document.querySelector('#myAccount');
 const reserveRoomBtn = document.querySelector('#reserveBtn');
-const roomCardSection = document.querySelector('#main');
+const roomCardSection = document.querySelector('#roomCardContainer');
 const searchDateInput = document.querySelector('#searchDate');
+const emptyStateMessage = document.querySelector('#emptyMessage');
+
+const singleRoomFilterBtn = document.querySelector('#singleRoom');
+const resSuiteFilterBtn = document.querySelector('#resSuite');
+const jrSuiteFilterBtn = document.querySelector('#jrSuite');
+const suiteFilterBtn = document.querySelector('#suite');
+
 
 // EVENT LISTENERS
 searchSubmitBtn.addEventListener('click', displaySearchResults);
+searchResultsBtn.addEventListener('click', displaySearchResults);
 searchDateInput.addEventListener('keydown', preventInvalidKeys);
 searchDateInput.addEventListener('click', blockOldDates);
+myAccountBtn.addEventListener('click', showMyAccountInfo);
+
+singleRoomFilterBtn.addEventListener('click', filterResults);
+resSuiteFilterBtn.addEventListener('click', filterResults);
+jrSuiteFilterBtn.addEventListener('click', filterResults);
+suiteFilterBtn.addEventListener('click', filterResults);
+
 
 upcomingBookingsBtn.addEventListener('click', function () {
   displayBookings(customer.futureBookings);
@@ -42,6 +57,14 @@ pastBookingsBtn.addEventListener('click', function () {
 let hotel, customer;
 
 // FUNCTIONS
+function showMyAccountInfo() {
+  const accountSummaryPage = document.getElementById('accountSummary');
+  const roomCostTotalLocation = document.getElementById('totalSpent');
+  const roomCostTotal = customer.calculateTotalSpent(hotel.rooms);
+  addClass(emptyStateMessage, 'hidden');
+  removeClass(accountSummaryPage, "hidden");
+  roomCostTotalLocation.insertAdjacentHTML('beforeend', `${roomCostTotal}`);
+}
 
 function preventInvalidKeys(event) {
   var invalidCharacters = ['e', '+', '-'];
@@ -126,12 +149,10 @@ function resetInput() {
 }
 
 function checkForEmptyState(bookingArray) {
-  let emptyStateLocation = document.getElementById('emptyMessage');
-  console.log(emptyStateLocation)
   if (bookingArray.length === 0) {
-    removeClass(emptyStateLocation, 'hidden');
+    removeClass(emptyStateMessage, 'hidden');
   } else {
-    addClass(emptyStateLocation, 'hidden');
+    addClass(emptyStateMessage, 'hidden');
   }
 }
 
@@ -202,9 +223,11 @@ function displayBookings(bookingArray) {
 }
 
 function displaySearchResults() {
+  let filterContainer = document.getElementById('filterContainer');
   resetHtml();
+  removeClass(filterContainer, "hidden");
   addClass(searchSubmitBtn, "disabled");
-  const date = searchDateInput.value
+  const date = searchDateInput.value;
   const availableRooms = hotel.findAvailableRoomsOnDate(date)
   availableRooms.forEach(room => {
     updateBidetValues(room);
@@ -244,6 +267,10 @@ function displaySearchResults() {
   })
 }
 
+function filterResults() {
+  const clickedButton =
+    addClass()
+}
 
 
 // STOP TRYING TO MAKE FETCH WORK

@@ -47,14 +47,23 @@
   </nav>
 
   <main id="main">
+    <section id="filterContainer" class="filter-container hidden">
+      <p>Filter by:</p>
+      <button id="singleRoom" class="filter-btn">Single Room</button>
+      <button id="resSuite" class="filter-btn">Residential Suite</button>
+      <button id="jrSuite" class="filter-btn">Junior Suite</button>
+      <button id="suite" class="filter-btn">Suite</button>
+    </section>
+    <section id="roomCardContainer">
+    </section>
     <section class="empty" id="emptyMessage">
       <h1 class="empty-header">There's nothing to see here...</h1>
       <p>Try adding a date to the search bar or booking a room.</p>
       <img alt="ninja" src="./images/ninja.svg" class="ninja">
     </section>
-    <section class="room-total hidden">
+    <section id="accountSummary" class="room-total hidden">
       <h2>Account Summary</h2>
-      <p>You have spent $5983.94 on rooms</p>
+      <p id="totalSpent">Total spent on rooms: $</p>
     </section>
   </main>
 

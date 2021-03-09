@@ -37,7 +37,7 @@ class Customer {
         roomCost += room.costPerNight;
       }
     })
-    return roomCost;
+    return roomCost.toFixed(2);
   }
 }
 

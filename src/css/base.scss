@@ -34,12 +34,6 @@
     position: absolute;
     top: 15%;
     left: 21%;
-  
-    label {
-      // position: absolute;
-      // top: 2rem;
-      // left: 5rem;
-    }
 
     input {
       @include simple-border;
@@ -51,22 +45,16 @@
     }
 
     .submit-button {
-      @include simple-border;
+      @include btn;
       position: relative;
       right: -4%;
-      background-color: $accent-orange;
       height: 3.75rem;
       width: 5rem;
-      border-top-right-radius: 30px;
-      border-bottom-right-radius: 30px;
-      @include transition;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
 
       .search-glass {
         width: 2rem;
-      }
-
-      &:hover {
-        @include btnHover;
       }
     }
   }
@@ -106,19 +94,35 @@
 main {
   @include margin;
 
+  .filter-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    .filter-btn {
+      @include btn;
+      background-color: $white;
+      height: 2rem;
+      margin: 20px 15px 20px 15px;
+      padding: 0 25px 0 25px;
+    }
+  }
+  
+
   .empty {
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
 
-  .empty-header {
-    padding: 30px 0 10px 0;
-  }
+    .empty-header {
+      padding: 30px 0 10px 0;
+    }
 
-  .ninja {
-    width: 200px;
-    margin: 30px 0 30px 0;
+    .ninja {
+      width: 200px;
+      margin: 30px 0 30px 0;
+    }
   }
 }
 
@@ -162,18 +166,11 @@ main {
     justify-items: column;
 
     .reserve-btn {
-      background-color: $accent-orange;
-      border-radius: $border-radius;
+      @include btn;
       height: 4rem;
       margin-bottom: 20px;
       padding: 0 25px 0 25px;
       font-size: 20px;
-      border: 2px solid $black;
-      @include transition;
-
-      &:hover {
-        @include btnHover;
-      }
     }
 
     span {
@@ -189,6 +186,10 @@ main {
 .room-total {
   @include margin;
   padding: 50px 0 150px 0;
+}
+
+.activeBtn {
+  background-color: $accent-orange;
 }
 
 .disabled {

@@ -24,5 +24,16 @@
 
 @mixin btnHover {
   cursor: pointer;
-  background-color: #fa5d19
+  background-color: #fc540b;
+}
+
+@mixin btn {
+  background-color: $accent-orange;
+  border-radius: $border-radius;
+  border: 2px solid $black;
+  @include transition;
+  
+  &:hover {
+    @include btnHover;
+  }
 }

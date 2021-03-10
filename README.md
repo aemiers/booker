@@ -1,5 +1,8 @@
 # Overlook Hotel Booker
-
+<p align="center">
+<img src="./src/images/logo.png" alt="Tractor Logo" width="300">
+</p>  
+  
 ## Table of Contents
 
 - [About the Project](#about-the-project)
@@ -88,7 +91,7 @@ Error handling was considered when building the website. The date category must 
 The customer can only book future stays because all of the past dates on the calendar are deactivated.
 ![](src/images/OSelected.png)
 If there are no rooms available or if the customer has not picked a date, the empty state ninja makes an appearance, prompting the user in the right direction.
-![](src/images/EmptyState.png)
+![](src/images/ONinja.png)
 
 #### Responsiveness
 ##### Mobile View

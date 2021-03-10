@@ -1,105 +1,111 @@
-# Webpack Starter Kit
-I am a readme
-## Clone This Repo
+#Overlook Hotel Booker
 
-That's right, _clone_ not fork. You will use this repo multiple times, but you can only fork a repository once. So here is what you need to do to clone the repo and still be able to push changes to your repo:
+## Table of Contents
 
-1. Clone down this repo. Since you don't want to name your project "webpack-starter-kit", you can use an optional argument when you run `git clone` (you replace the `[...]` with the terminal command arguments): `git clone [remote-address] [what you want to name the repo]`
-1. Remove the default remote: `git remote rm origin` (notice that `git remote -v` not gives you back nothing)
-1. Create a new repo on GitHub with the name of `[what you want to name the repo]` to be consistent with naming
-1. Copy the address that you would use to clone down this repo - something like `git@github.com:...`
-1. Add this remote to your cloned down repo: `git remote add origin [address you copied in the previous step]` - do not include the brackets
+- [About the Project](#about-the-project)
+  - [Final Product](#final-product)
+- [Project Goals](#project-goals)
+- [Installation](#installation)
+- [Technologies Used](#technologies-used)
+- [Functionality](#functionality)
+  - [General](#general)
+  - [Error Handling](#error-handling)
+  - [Mobile View](#mobile-view)
+  - [Tablet View](#tablet-view)
+  - [Accessibility](#accessibility)
+- [Contributors](#contributors)
+- [Contact](#contact)
 
-Now try to commit something and push it up to your new repo. If everything is setup correctly, you should see the changes on GitHub.
 
-## Setup
+## About the Project
 
-After one person has gone through the steps of cloning down this repo and editing the remote, everyone should clone down the repo. 
+In this project, our job was to take code that was written by another student and transform it into a beautiful, functional application. 
 
-Then install the library dependencies. Run:
+Project spec ->
+https://frontend.turing.io/projects/overlook.html
 
-```bash
-npm install
-```
+#### Final Product:
+![](src/images/OTop.png)
+![](src/images/OBottom.png)
 
-To verify that it is setup correctly, run `npm start` in your terminal. Go to `http://localhost:8080/` and you should see a page with some `h1` text, Turing logo image and a beautiful gradient background. If that's the case, you're good to go. Enter `control + c` in your terminal to stop the server at any time.
+## Project Goals 
+1. Make network requests to API endpoints to retrieve and manipulate data.
+2. Use Object Oriented Programming (OOP) to drive the design of the application and the code.
+3. Create a robust test suite that thoroughly tests all functionality of a client-side application.
+4. Ensure the app is following best accessibility practices.
+5. Leverage Sass to DRY up CSS.
+6. Incorporate Webpack to streamline the workflow process.
+7. Make the app responsive so that content can be viewed on all devices.
 
-## Where to Add Your Code
+## Installation
+View the code -> 
+https://github.com/aemiers/booker
 
-### JavaScript
 
-You have to be very intentional with where you add your feature code. This repo uses a tool called [webpack](https://webpack.js.org/) to combine many JavaScript files into one big file. Webpack enables you to have many, separate JavaScript files to keep your code organized and readable. Webpack expects all of your code files to be in a specific place, or else it doesn't know how to combine them all behind the scenes.
+To view the site ->
 
-**Create all of your feature code files in the `src` directory.**
+Clone down the local server
+https://github.com/turingschool-examples/overlook-api
 
-Since code is separated into multiple files, you need to use the `import` and `export` syntax to share code across file.
+Then run
+`npm install`
+`npm start`
 
-Here is a video that walks through some information about [import and export](https://www.youtube.com/watch?v=_3oSWwapPKQ). There are a lot of resources out there about `import` and `export`, and resources will sometimes call them `ES6 modules`. It's something you will see in React and beyond.
+Clone down the repo to your local machine ->
+https://github.com/aemiers/booker
 
-### HTML
+Then run
+`npm install`
+`npm start`
 
-Add the HTML you need in the `index.html` file in the `./src` directory. There is some boilerplate HTML that exists from the start that you can modify.
+Go to http://localhost:8080/ to view the website.
 
-### CSS (SCSS/SASS)
+## Technologies Used
 
-This project is setup to use SCSS/SASS files by default instead of your regular CSS files. Add your SCSS files in the `src/css` directory. There is a `base.scss` file already there, but you can change this file and add multiple SCSS files in this directory.
+- [![JavaScript](https://img.shields.io/badge/javascript%20-%23323330.svg?&style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)](https://www.javascript.com/)
 
-This might sound weird, but you need to `import` your SCSS files in the JavaScript entry file (`index.js`) for the styles to be applied to your HTML. The example `base.scss` file has already been imported in the JavaScript entry file as an example.
+- ![HTML5](https://img.shields.io/badge/html5%20-%23E34F26.svg?&style=for-the-badge&logo=html5&logoColor=white)
 
-### Images
+- ![SASS](https://img.shields.io/badge/SASS%20-hotpink.svg?&style=for-the-badge&logo=SASS&logoColor=white)
 
-Add your image files in the `src/images` directory. Similar to CSS files, you need to `import` image files in the JavaScript entry file (`index.js`). Then go into the HTML and add an `img` element with the `src` attribute pointing to the `images` directory. There is an example in the `index.html` file for you to see.
+- ![Webpack](https://img.shields.io/badge/webpack%20-%238DD6F9.svg?&style=for-the-badge&logo=webpack&logoColor=black)
 
-## How to View Your Code in Action
+- ![Mocha](https://img.shields.io/badge/-mocha-%238D6748?&style=for-the-badge&logo=mocha&logoColor=white)
 
-In the terminal, run:
+- ![Mocha](https://img.shields.io/badge/node.js%20-%2343853D.svg?&style=for-the-badge&logo=node.js&logoColor=white)
 
-```bash
-npm start
-```
 
-You will see a bunch of lines output to your terminal. One of those lines will be something like:
+## Functionality
 
-```bash
-Project is running at http://localhost:8080/
-```
+#### General
+Overlook Hotel Booker is a versatile web application that enables its users to book hotel rooms, view their upcoming and past reservations, and see their billing history. If a user desires to book a hotel room for a specific date, the available rooms will be filtered and only show the customer rooms that have not been booked for their choice date. The customer can also view their upcoming reservations, which are sorted by date. The past reservations tab displays reservations from the most recent stays on back, making it convient for the customer to locate their desired stay. 
 
-Go to `http://localhost:8080/` in your browser to view your code running in the browser.
+<img src="https://media.giphy.com/media/axksaFKTXAHGgm7Wq5/giphy.gif" width="80%">
 
----
+#### Error Handling
+Error handling was considered when building the website. The date category must be completed before the search submit button is activated. The customer can only book future stays because all of the past dates on the calendar are deactivated.
+![](src/images/OCalendar.png)
+![](src/images/OSelected.png)
 
-## Test Files Organization
+#### Responsive
+##### Mobile View
+<img src="https://media.giphy.com/media/m6ynGxA4FKV8mHEYKO/giphy.gif">
 
-Similar to feature code, your test code needs to be put in a specific place for it to run successfully.
+##### Tablet View
+<img src="https://media.giphy.com/media/cAMo5hUMZn16e25NH3/giphy.gif">
 
-**Put all of your test files in the `test` directory.** As a convention, all test filenames should end with `-test.js`. For instance: `box-test.js`.
+#### Accessibility
+Overlook Hotel Booker scores very highly on Wave and received a 100% from Lighthouse on Accessibility.. Users can tab throughout the full application, making it accessible for those using keyboards to navigate through. 
 
-## Running Your Tests
+![](src/images/OAccessibility.png)
 
-Run your test suite using the command:
+## Contributers
+* [Anneke Miers](https://github.com/aemiers)
 
-```bash
-npm test
-```
+## Contact
+[<img src="https://img.shields.io/badge/LinkedIn-anneke--miers-informational?style=for-the-badge&labelColor=black&logo=linkedin&logoColor=0077b5&&color=0FBBD6"/>][linkedin2]
+[<img src="https://img.shields.io/badge/Github-aemiers-informational?style=for-the-badge&labelColor=black&logo=github&color=8B0BD5"/>][github2]
 
-The test results will output to the terminal.
-
----
-
-## Linting Your Code
-
-Run the command in your terminal `npm run lint` to run the linter on your JavaScript code. There will be errors and warnings right from the start in this starter kit - the linter is still running successfully.
-
-Your linter will look at the JavaScript files you have within the `src` directory and the `test` directory. 
-
-## Webpack?
-
-If you look in the `package.json` file, you'll see one of the library dependencies called `webpack`. If you're interested in learning more about what Webpack is and how it works behind the scenes, take a look through the [Webpack configuration documentation](https://webpack.js.org/concepts/).
-
-## Deploying to GitHub Pages
-
-_If you are finished with the functionality and testing of your project_, then you can consider deploying your project to the web! This way anyone can play it without cloning down your repo.
-
-[GitHub Pages](https://pages.github.com/) is a great way to deploy your project to the web. Don't worry about this until your project is free of bugs and well tested!
-
-If you _are_ done, you can follow [this procedure](./gh-pages-procedure.md) to get your project live on GitHub Pages.
+<!-- Personal Definitions  -->
+[linkedin2]: https://www.linkedin.com/in/anneke-miers/
+[github2]: https://github.com/aemiers

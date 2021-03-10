@@ -1,4 +1,4 @@
-#Overlook Hotel Booker
+# Overlook Hotel Booker
 
 ## Table of Contents
 
@@ -83,11 +83,14 @@ Overlook Hotel Booker is a versatile web application that enables its users to b
 <img src="https://media.giphy.com/media/axksaFKTXAHGgm7Wq5/giphy.gif" width="80%">
 
 #### Error Handling
-Error handling was considered when building the website. The date category must be completed before the search submit button is activated. The customer can only book future stays because all of the past dates on the calendar are deactivated.
+Error handling was considered when building the website. The date category must be completed before the search submit button is activated. 
 ![](src/images/OCalendar.png)
+The customer can only book future stays because all of the past dates on the calendar are deactivated.
 ![](src/images/OSelected.png)
+If there are no rooms available or if the customer has not picked a date, the empty state ninja makes an appearance, prompting the user in the right direction.
+![](src/images/EmptyState.png)
 
-#### Responsive
+#### Responsiveness
 ##### Mobile View
 <img src="https://media.giphy.com/media/m6ynGxA4FKV8mHEYKO/giphy.gif">
 

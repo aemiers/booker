@@ -5,7 +5,9 @@
   <meta charset="UTF-8">
   <meta name="description" content="Overlook Hotel Booker">
   <meta name="keywords" content="Hotel, Travel, Booking">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
   <title>Overlook Booker</title>
   <link rel="preconnect" type="text/css" href="https://fonts.gstatic.com">
   <link
@@ -14,18 +16,14 @@
 </head>
 
 <body class="body">
-
   <header class="header">
     <img alt="booker logo" src="./images/logo.png" class="logo">
     <p class="welcome" id="welcome">Welcome back, </p>
   </header>
-
   <section class="main-image-section">
-
     <div class="main-image-container">
       <img alt="overlook hotel image" src="./images/neuschwanstein.jpg" class="main-image">
     </div>
-
     <div class="date-entry-section">
       <label for="date">Search Available Rooms:
         <input type="date" min="2020/03/08" id="searchDate" name="date" required pattern="\d{4}/\d{2}/\d{2}"
@@ -34,7 +32,6 @@
         <img alt="search glass" src="./images/search.svg" class="search-glass"></button>
     </div>
   </section>
-
   <nav class="navigation" id="navigation">
     <!-- <button class="navigation__drop-down drop-down" id="dropDown" aria-label="Open drop down menu"></button> -->
     <section id="navButtonContainer" class="nav-button-container">
@@ -43,7 +40,6 @@
       <a id="myAccount" class="nav-btn">My Account</a>
     </section>
   </nav>
-
   <main id="main">
     <section id="filterContainer" class="filter-container hidden">
       <p>Filter by:</p>
@@ -52,7 +48,7 @@
       <button id="jrSuite" class="filter-btn">Junior Suite</button>
       <button id="suite" class="filter-btn">Suite</button>
     </section>
-    <section id="roomCardContainer">
+    <section id="roomCardContainer" class="room-card-container">
     </section>
     <section class="empty" id="emptyMessage">
       <h1 class="empty-header">There's nothing to see here...</h1>
@@ -64,8 +60,6 @@
       <p id="totalSpent"></p>
     </section>
   </main>
-
-
 </body>
 
 </html>

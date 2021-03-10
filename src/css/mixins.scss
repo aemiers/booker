@@ -1,14 +1,11 @@
 @mixin margin {
   margin-right: 50px;
   margin-left: 50px;
-  // max-width: 1400px;
 }
 
 @mixin borders {
   border-top: 10px solid $black;
   border-bottom: 10px solid $black;
-  // border-left: 20px solid $black;
-  // border-right: 20px solid $black;
 }
 
 @mixin simple-border {

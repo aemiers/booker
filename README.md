@@ -101,9 +101,9 @@ If there are no rooms available or if the customer has not picked a date, the em
 <img src="https://media.giphy.com/media/cAMo5hUMZn16e25NH3/giphy.gif">
 
 #### Accessibility
-Overlook Hotel Booker scores very highly on Wave and received a 100% from Lighthouse on Accessibility.. Users can tab throughout the full application, making it accessible for those using keyboards to navigate through. 
+Overlook Hotel Booker scores very highly on Wave and received a 100% from Lighthouse on Accessibility. Users can tab throughout the full application, making it accessible for those using keyboards to navigate through. 
 
-![](src/images/OAccessibility.png)
+![](src/images/OWave.png)
 
 ## Contributers
 * [Anneke Miers](https://github.com/aemiers)

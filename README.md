@@ -22,7 +22,7 @@
 
 ## About the Project
 
-In this project, our job was to take code that was written by another student and transform it into a beautiful, functional application. 
+In this project,my job was to take information from an API and create a functional website using that data. The data is for a hotel and contained booking, room, and customer information. 
 
 Project spec ->
 https://frontend.turing.io/projects/overlook.html
